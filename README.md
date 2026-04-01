@@ -43,6 +43,16 @@ npm run build
 - `npm run preview` — Visualiza build em producao
 - `npm run lint` — Verifica erros TypeScript
 
+## Deploy no GitHub Pages
+
+O projeto esta configurado para deploy automatico via GitHub Actions.
+
+1. No repositorio GitHub, habilite **Settings > Pages > Build and deployment > Source: GitHub Actions**.
+2. Faça push para a branch `main`.
+3. O workflow `Deploy to GitHub Pages` vai gerar e publicar a pasta `dist`.
+
+O `BASE_URL` e configurado automaticamente no workflow como `/<repo-name>/`.
+
 ## Tecnologias
 
 - React 19 + TypeScript

@@ -74,7 +74,7 @@ Elas funcionam através de uma arquitetura que permite à IA processar bilhões 
 A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, prevendo a próxima palavra (token) com base no contexto e na intenção do usuário (prompt).`,
     theme: 'accent',
     animationType: 'slide',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'question'
   },
   {
     id: 'intro-2',
@@ -131,6 +131,7 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
 * **Risco de Alucinação:** A IA é probabilística, não um banco de dados exato. Ela pode inventar dados, leis, referências bibliográficas ou fatos históricos com muita convicção.
 * **LGPD e Viés Algorítmico:** Modelos de IA podem refletir e amplificar preconceitos presentes nos dados de treinamento. Tenha cuidado redobrado ao processar dados sensíveis, informações pessoais ou ao tomar decisões que afetem cidadãos.
 * **Direitos Autorais e Propriedade Intelectual:** A IA pode gerar conteúdo que infringe direitos autorais ou que é baseado em obras protegidas. Sempre verifique a origem e a legalidade do material gerado, especialmente para publicações oficiais.
+* **Transparência e Rastreabilidade:** Sempre que usar IA, referencie que houve auxílio de uma ferramenta de IA para garantir transparência e rastreabilidade.
 * **Responsabilidade Humana:** A IA é um copiloto, um suporte avançado. A responsabilidade legal, técnica e moral pelo conteúdo gerado e pelas decisões tomadas é sempre do profissional (Pesquisador, Extensionista, Analista).
     `,
     spotlightQuote: 'IA sugere, o humano decide.',
@@ -300,7 +301,7 @@ Veja alguns cenários em que o NotebookLM pode apoiar diferentes áreas com mais
     ],
     theme: 'accent',
     animationType: 'slide',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'notebook'
   },
   {
     id: 'minilab-3',
@@ -322,7 +323,7 @@ Vamos baixar os arquivos de referência, subir no NotebookLM e usar esse materia
 ],
     theme: 'accent',
     animationType: 'float',
-    backgroundAnimation: 'minilab'
+    backgroundAnimation: 'notebook'
   },
   {
     id: 'gemini-gems',
@@ -342,7 +343,7 @@ O Gem do Google é um agente personalizado que pode ser treinado com dados espec
     ],
     theme: 'accent',
     animationType: 'pulse',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'gemini'
   },
   {
     id: 'minilab-4',
@@ -364,7 +365,7 @@ Vamos explorar como usar as duas ferramentas em conjunto para potencializar a an
 ],
     theme: 'accent',
     animationType: 'float',
-    backgroundAnimation: 'minilab'
+    backgroundAnimation: 'gemini'
   },
   {
     id: 'workspace-text',
@@ -424,7 +425,7 @@ A IA também potencializa a análise de dados e a criação de conteúdo visual,
     title: 'Geradores de Imagens',
     subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
-Ferramentas para criação de materiais de divulgação, ilustrações técnicas e prototipagem visual.
+Ferramentas para criação de materiais de divulgação, ilustrações técnicas e prototipagem visual, semelhantes ao **Nano Banana** do Google.
 
 * **Midjourney:** Referência em qualidade estética e realismo. Operado via Discord, ideal para campanhas de alto impacto visual (Comunicação e Marketing).
 * **DALL-E 3 (OpenAI):** Integrado ao ecossistema Microsoft e ChatGPT. Preciso em seguir instruções complexas e renderizar textos legíveis nas imagens.
@@ -439,13 +440,13 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
     title: 'Texto, Raciocínio e Vídeos',
     subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
-**IA Generativa de Texto e Raciocínio (LLMs):**
+**IA Generativa de Texto e Raciocínio (LLMs), semelhante ao Gemini:**
 * **ChatGPT (OpenAI):** Pioneiro e versátil. Excelente para raciocínio lógico e suporte à programação.
 * **Claude (Anthropic):** Focado em segurança e escrita humanizada. Grande "janela de contexto", ideal para analisar múltiplos PDFs simultaneamente (Jurídico e Pesquisa).
 * **DeepSeek:** Alta eficiência e baixo custo. Performance excepcional em matemática, lógica e codificação.
 
 **Criadores de Vídeos (Text-to-Video):**
-* **Sora (OpenAI):** Alta fidelidade para vídeos de até 1 minuto com consistência física (preview).
+* **Sora (OpenAI):** Alta fidelidade para vídeos de até 1 minuto com consistência física *(até 26 de abril de 2026)*.
 * **Luma Dream Machine:** Acessível e de alta qualidade. Útil para animar fotos históricas.
 * **Kling AI:** Potente para movimentos complexos e vídeos longos (até 2 minutos), ideal para tutoriais.
     `,
@@ -458,6 +459,11 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
     title: 'Prototipagem, Automação e Apresentações',
     subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
+**Criação de Apresentações:**
+* **Beautiful.ai:** IA focada em design que ajusta o layout automaticamente.
+* **Tome:** Focado em "storytelling" assistido por IA.
+* **Prezi AI:** Estruturas de zoom e mapas mentais dinâmicos a partir de textos.
+
 **Insights e Prototipagem:**
 * **Google AI Studio:** Ambiente para desenvolvedores testarem o Gemini 1.5 Pro com até 2 milhões de tokens.
 * **Gamma App:** Cria sites e apresentações instantaneamente a partir de um prompt.
@@ -467,11 +473,6 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 * **Make:** Interface visual sofisticada para fluxos complexos.
 * **n8n:** Alternativa poderosa com instalação em servidores próprios (self-hosted).
 * **Zapier:** Líder em integrações simples e ecossistema de apps.
-
-**Criação de Apresentações:**
-* **Beautiful.ai:** IA focada em design que ajusta o layout automaticamente.
-* **Tome:** Focado em "storytelling" assistido por IA.
-* **Prezi AI:** Estruturas de zoom e mapas mentais dinâmicos a partir de textos.
     `,
     theme: 'accent',
     animationType: 'slide',
@@ -485,13 +486,16 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 **Para Pesquisa e Ensino:**
 * **Perplexity AI:** Motor de busca que cita fontes acadêmicas em tempo real.
 * **Scite.ai:** Analisa o contexto de citações em artigos científicos.
-
-**Para Jurídico, RH e Contratos:**
-* **Spellbook:** Integrada ao Word, revisa contratos e sugere redações para mitigar riscos.
-* **Humane (ATS):** Auxilia na triagem ética de currículos e mapeamento de competências.
-
-**Para Financeiro e Compras:**
+* **Consensus:** Um motor de busca que usa IA para extrair conclusões diretamente de artigos científicos revisados por pares.
 * **ChatPDF / AskYourPDF:** Analisa rapidamente editais de licitação volumosos, buscando palavras-chave e prazos.
+
+**Para Jurídico, RH e Administração:**
+* **Projuris Contratos:** Solução para extrair dados de documentos, controlar prazos de renovação automaticamente e gerir o ciclo de vida contratual.
+* **Gupy Clima e Engajamento:** Utilizada para analisar o sentimento dos servidores em pesquisas internas, ajudando a identificar focos de desmotivação ou sobrecarga antes que se tornem problemas de gestão.
+* **IBM watsonx Orchestrate:** Oferece agentes de IA que automatizam tarefas complexas de RH entre sistemas, como extração de dados para folhas de pagamento ou gestão de benefícios de forma segura e em escala.
+* **Jus IA:** Plataforma brasileira que analisa jurisprudência e gera peças jurídicas.
+* **Alice (CGU):** Ferramenta desenvolvida pela Controladoria-Geral da União que usa IA para analisar editais e atas de registro de preços, identificando riscos de irregularidades ou sobrepreço automaticamente.
+
     `,
     theme: 'accent',
     animationType: 'pulse',

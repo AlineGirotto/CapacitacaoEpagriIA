@@ -49,13 +49,19 @@ const TechBackground = () => {
   );
 };
 
-const BackgroundAnimation = ({ type }: { type?: string }) => {
+const BackgroundAnimation = ({
+  type,
+  productBadge,
+}: {
+  type?: string;
+  productBadge?: 'gemini' | 'notebooklm';
+}) => {
   const particles = React.useMemo(() => {
     return Array.from({ length: 20 }).map(() => ({
       left: `${Math.random() * 100}%`,
       scale: 0.5 + Math.random() * 1.5,
       duration: 15 + Math.random() * 20,
-      delay: Math.random() * 35 // Negative delay to spread them across the screen immediately
+      delay: Math.random() * 35
     }));
   }, []);
 
@@ -63,20 +69,21 @@ const BackgroundAnimation = ({ type }: { type?: string }) => {
   if (type === 'tech') return <TechBackground />;
 
   let icons: string[] = [];
+  const useToolLogos = productBadge === 'gemini' || productBadge === 'notebooklm';
   if (type === 'coffee') icons = ['☕', '🥐', '🍩', '🍪', '💬'];
   if (type === 'lunch') icons = ['🍽️', '🥗', '🍝', '🍎', '🥤'];
   if (type === 'minilab') icons = ['💻', '⚙️', '🧪', '🚀', '🧠', '💡'];
-  if (type === 'challenge') icons = ['🎯', '🧗', '🧩', '🏆', '⛰️'];
+  if (type === 'challenge') icons = ['🎯', '🧩', '🏆', '👾', '🏅'];
   if (type === 'handson') icons = ['🛠️', '🔨', '🔧', '🙌', '💪'];
   if (type === 'celebration') icons = ['🎉', '🥳', '🎊', '🍾', '🎈'];
   if (type === 'google') icons = ['📱', '💻', '☁️', '🤖', '🌐'];
   if (type === 'question') icons = ['❓', '❔', '🤔', '💭', '🧐'];
   if (type === 'prompt') icons = ['💬', '📝', '✍️', '⚙️', '📰'];
 
-  if (icons.length === 0) return null;
+  if (!useToolLogos && icons.length === 0) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-10">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
       <style>{`
         @keyframes floatUp {
           0% { top: 110%; }
@@ -98,15 +105,29 @@ const BackgroundAnimation = ({ type }: { type?: string }) => {
             animationDelay: `-${p.delay}s`
           }}
         >
-          <span 
-            className="text-6xl inline-block"
-            style={{
-              animation: `rotateFull ${p.duration}s linear infinite`,
-              animationDelay: `-${p.delay}s`
-            }}
-          >
-            {icons[i % icons.length]}
-          </span>
+          {useToolLogos ? (
+            <img
+              src={productBadge === 'gemini' ? logoGemini : logoNotebook}
+              alt={productBadge === 'gemini' ? 'Logo Gemini' : 'Logo NotebookLM'}
+              className="w-12 h-12 md:w-14 md:h-14 object-contain inline-block"
+              style={{
+                animation: `rotateFull ${p.duration}s linear infinite`,
+                animationDelay: `-${p.delay}s`,
+                filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.35))',
+                opacity: 0.92,
+              }}
+            />
+          ) : (
+            <span
+              className="text-6xl inline-block"
+              style={{
+                animation: `rotateFull ${p.duration}s linear infinite`,
+                animationDelay: `-${p.delay}s`
+              }}
+            >
+              {icons[i % icons.length]}
+            </span>
+          )}
         </div>
       ))}
     </div>
@@ -425,7 +446,7 @@ export default function Presentation() {
     const lines = text.split('\n');
 
     return (
-      <p className={`text-sm md:text-base italic ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+      <p className={`text-sm md:text-base italic text-justify ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
         {lines.map((line, idx) => {
           const trimmed = line.trim();
           const match = trimmed.match(/^([^:]+):\s*(.*)$/);
@@ -543,7 +564,7 @@ export default function Presentation() {
                 'bg-white text-slate-900'
               }`}
             >
-              <BackgroundAnimation type={slide.backgroundAnimation} />
+              <BackgroundAnimation type={slide.backgroundAnimation} productBadge={slide.productBadge} />
               {/* Decorative elements */}
               {isDark && (
                 <div className="absolute top-0 right-0 w-96 h-96 bg-epagri-green rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3"></div>
@@ -600,7 +621,7 @@ export default function Presentation() {
                 {/* Section Body */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                   <div className={slide.links || slide.qrCode ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
-                    <div className={`prose prose-base md:prose-lg max-w-none leading-relaxed ${
+                    <div className={`prose prose-base md:prose-lg max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
                       isDark ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200' : 
                       'prose-slate prose-headings:text-epagri-dark prose-a:text-epagri-green hover:prose-a:text-epagri-dark prose-strong:text-slate-900'
                     }`}>
@@ -771,7 +792,11 @@ export default function Presentation() {
               'bg-white text-slate-900'
             }`}
           >
-            <BackgroundAnimation key={`bg-${slideIndex}`} type={slides[slideIndex].backgroundAnimation} />
+            <BackgroundAnimation
+              key={`bg-${slideIndex}`}
+              type={slides[slideIndex].backgroundAnimation}
+              productBadge={slides[slideIndex].productBadge}
+            />
             {/* Decorative elements */}
             {slides[slideIndex].theme === 'dark' && (
               <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-epagri-green rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
@@ -839,7 +864,7 @@ export default function Presentation() {
                 {/* Section Body */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                   <div className={slides[slideIndex].links || slides[slideIndex].qrCode ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
-                    <div className={`prose prose-lg md:prose-xl max-w-none leading-relaxed ${
+                    <div className={`prose prose-lg md:prose-xl max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
                       slides[slideIndex].theme === 'dark' ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200' : 
                       'prose-slate prose-headings:text-epagri-dark prose-a:text-epagri-green hover:prose-a:text-epagri-dark prose-strong:text-slate-900'
                     }`}>

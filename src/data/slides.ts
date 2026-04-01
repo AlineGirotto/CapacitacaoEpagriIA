@@ -548,7 +548,7 @@ O futuro é promissor e cheio de possibilidades. Continuem explorando, experimen
 O DEGTI está à disposição para apoiar a implementação dos projetos e para continuar essa jornada. **Muito obrigado a todos!**
 `,
     examples: [
-      { area: 'Dúvidas e Suporte', text: 'Equipe DEGTI\n\nE-mail: desenvolvimento@epagri.sc.gov.br\nalinegirotto@epagri.sc.gov.br\n\nTelefone: (48) 3665-5403\nRamal: 55403\n\nEstamos à disposição para apoiar a implementação dos seus projetos com IA!' }
+      { area: 'Dúvidas e Suporte', text: 'Equipe DEGTI e DEPLAN\n\ndesenvolvimento@epagri.sc.gov.br\nplanejamento@epagri.sc.gov.br\nalinegirotto@epagri.sc.gov.br\n	humbertoneto@epagri.sc.gov.br\n\nContato Aline: (48) 3665-5403\nContato Humberto: (48) 3665-5297\n\nEstamos à disposição para apoiar a implementação dos seus projetos com IA!' }
     ],
     theme: 'dark',
     animationType: 'pulse',

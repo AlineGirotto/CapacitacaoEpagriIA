@@ -83,7 +83,7 @@ const BackgroundAnimation = ({
   if (!useToolLogos && icons.length === 0) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-15">
       <style>{`
         @keyframes floatUp {
           0% { top: 110%; }
@@ -470,6 +470,146 @@ export default function Presentation() {
     );
   };
 
+  const isSupportExample = (slideId: string, area: string) =>
+    slideId === 'celebration' && area === 'Dúvidas e Suporte';
+
+  const renderSupportCard = (text: string, isDark: boolean, isPresentation = false) => {
+    const lines = text
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const team = lines.find((line) => line.toLowerCase().startsWith('equipe ')) || '';
+    const emails = lines.filter((line) => line.includes('@'));
+    const phoneRegex = /(\(?\d{2}\)?\s*\d{4,5}[-\s]?\d{4})/;
+    const phoneContactLines = lines.filter((line) => phoneRegex.test(line));
+    const parsedPhoneContacts = phoneContactLines
+      .map((line, idx) => {
+        const [rawLabel, ...rest] = line.split(':');
+        const valueSource = rest.length > 0 ? rest.join(':') : line;
+        const valueMatch = valueSource.match(phoneRegex);
+        if (!valueMatch) return null;
+
+        const cleanLabel = rawLabel
+          ? rawLabel
+              .replace(/^contato\s*/i, '')
+              .replace(/^telefone\s*/i, '')
+              .trim()
+          : '';
+
+        return {
+          label: cleanLabel ? `Telefone ${cleanLabel}` : `Telefone ${idx + 1}`,
+          value: valueMatch[1].replace(/\s+/g, ' ').trim(),
+        };
+      })
+      .filter((item): item is { label: string; value: string; suffix?: string } => item !== null);
+
+    const phoneLine = lines.find((line) => line.toLowerCase().startsWith('telefone:')) || '';
+    const extensionLine = lines.find((line) => line.toLowerCase().startsWith('ramal:')) || '';
+    const closingLine =
+      lines.find((line) => line.toLowerCase().startsWith('estamos à disposição')) || '';
+
+    const phone = phoneLine.replace(/^Telefone:\s*/i, '').trim();
+    const extension = extensionLine.replace(/^Ramal:\s*/i, '').trim();
+    const fallbackContacts = [
+      phone ? { label: 'Telefone 1', value: phone } : null,
+      extension ? { label: 'Telefone 2', value: extension, suffix: '(ramal)' } : null,
+    ].filter(Boolean) as { label: string; value: string; suffix?: string }[];
+    const phoneContacts = parsedPhoneContacts.length > 0 ? parsedPhoneContacts : fallbackContacts;
+
+    return (
+      <div
+        className={`w-full rounded-3xl border p-8 md:p-10 text-center ${
+          isDark
+            ? 'bg-gradient-to-br from-white/10 via-white/5 to-white/10 border-white/20 shadow-2xl shadow-black/20'
+            : 'bg-gradient-to-br from-white via-slate-50 to-white border-slate-200 shadow-xl shadow-slate-300/40'
+        }`}
+      >
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-epagri-green text-white shadow-lg">
+          <CheckCircle2 size={24} />
+        </div>
+        <h3 className={`font-display font-black ${isPresentation ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'} ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
+          Dúvidas e Suporte
+        </h3>
+        {team && (
+          <p className={`mt-3 ${isPresentation ? 'text-lg md:text-xl' : 'text-base md:text-lg'} italic ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+            {team}
+          </p>
+        )}
+
+        {emails.length > 0 && (
+          <div className="mt-8">
+            <p className={`text-xs font-bold uppercase tracking-[0.18em] ${isDark ? 'text-epagri-olive' : 'text-epagri-green'}`}>
+              E-mail
+            </p>
+            <div className="mt-3 space-y-1">
+              {emails.map((email) => (
+                <p
+                  key={email}
+                  className={`${isPresentation ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-semibold break-all ${isDark ? 'text-white' : 'text-epagri-dark'}`}
+                >
+                  {email}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {phoneContacts.length > 0 && (
+          <div className={`mt-8 grid grid-cols-1 gap-4 ${phoneContacts.length > 1 ? 'md:grid-cols-2' : ''}`}>
+            {phoneContacts.map((contact) => (
+              <div
+                key={`${contact.label}-${contact.value}`}
+                className={`rounded-2xl border px-5 py-4 ${isDark ? 'bg-white/10 border-white/15' : 'bg-white border-slate-200'}`}
+              >
+                <p className={`text-xs font-bold uppercase tracking-[0.14em] ${isDark ? 'text-epagri-olive' : 'text-epagri-green'}`}>
+                  {contact.label}
+                </p>
+                <p className={`mt-2 ${isPresentation ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-black ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
+                  {contact.value}
+                </p>
+                {contact.suffix && (
+                  <p className={`mt-1 text-xs uppercase tracking-[0.14em] ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>
+                    {contact.suffix}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {closingLine && (
+          <p className={`mt-8 ${isPresentation ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'} italic font-medium ${isDark ? 'text-slate-100' : 'text-slate-700'}`}>
+            {closingLine}
+          </p>
+        )}
+      </div>
+    );
+  };
+
+  const renderExampleCard = (
+    ex: { area: string; text: string },
+    isDark: boolean,
+    slideId: string,
+    isPresentation = false,
+  ) => {
+    if (isSupportExample(slideId, ex.area)) {
+      return renderSupportCard(ex.text, isDark, isPresentation);
+    }
+
+    return (
+      <div className={`p-7 md:p-8 rounded-3xl border min-h-[230px] w-full ${
+        isDark ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
+      }`}>
+        <h3 className={`text-lg font-bold flex items-center gap-2 mb-3 ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
+          <CheckCircle2 className={isDark ? 'text-epagri-olive' : 'text-epagri-green'} size={20} />
+          {ex.area}
+        </h3>
+        {renderExampleText(ex.text, isDark)}
+      </div>
+    );
+  };
+
   const renderProductBadge = (
     badge: NonNullable<typeof slides[0]['productBadge']>,
     isDark: boolean,
@@ -728,18 +868,7 @@ export default function Presentation() {
                         slide.examples.length === 1 ? 'max-w-2xl' : 'md:grid-cols-2 max-w-6xl'
                       }`}>
                         {slide.examples.map((ex, idx) => (
-                          <div key={idx} className={`p-7 md:p-8 rounded-3xl border min-h-[230px] w-full ${
-                            isDark ? 'bg-white/5 border-white/10' : 
-                            'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
-                          }`}>
-                            <h3 className={`text-lg font-bold flex items-center gap-2 mb-3 ${
-                              isDark ? 'text-white' : 'text-epagri-dark'
-                            }`}>
-                              <CheckCircle2 className={isDark ? 'text-epagri-olive' : 'text-epagri-green'} size={20} />
-                              {ex.area}
-                            </h3>
-                            {renderExampleText(ex.text, isDark)}
-                          </div>
+                          <div key={idx}>{renderExampleCard(ex, isDark, slide.id)}</div>
                         ))}
                       </div>
                     )}
@@ -758,18 +887,7 @@ export default function Presentation() {
                     slide.examples.length === 1 ? 'max-w-2xl' : 'md:grid-cols-2 max-w-6xl'
                   }`}>
                     {slide.examples.map((ex, idx) => (
-                      <div key={idx} className={`p-7 md:p-8 rounded-3xl border min-h-[230px] w-full ${
-                        isDark ? 'bg-white/5 border-white/10' : 
-                        'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
-                      }`}>
-                        <h3 className={`text-lg font-bold flex items-center gap-2 mb-3 ${
-                          isDark ? 'text-white' : 'text-epagri-dark'
-                        }`}>
-                          <CheckCircle2 className={isDark ? 'text-epagri-olive' : 'text-epagri-green'} size={20} />
-                          {ex.area}
-                        </h3>
-                        {renderExampleText(ex.text, isDark)}
-                      </div>
+                      <div key={idx}>{renderExampleCard(ex, isDark, slide.id)}</div>
                     ))}
                   </div>
                 )}
@@ -971,18 +1089,7 @@ export default function Presentation() {
                         slides[slideIndex].examples.length === 1 ? 'max-w-2xl' : 'md:grid-cols-2 max-w-6xl'
                       }`}>
                         {slides[slideIndex].examples.map((ex, idx) => (
-                          <div key={idx} className={`p-7 md:p-8 rounded-3xl border min-h-[230px] w-full ${
-                            slides[slideIndex].theme === 'dark' ? 'bg-white/5 border-white/10' : 
-                            'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
-                          }`}>
-                            <h3 className={`text-lg font-bold flex items-center gap-2 mb-3 ${
-                              slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'
-                            }`}>
-                              <CheckCircle2 className={slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'} size={20} />
-                              {ex.area}
-                            </h3>
-                            {renderExampleText(ex.text, slides[slideIndex].theme === 'dark')}
-                          </div>
+                          <div key={idx}>{renderExampleCard(ex, slides[slideIndex].theme === 'dark', slides[slideIndex].id, true)}</div>
                         ))}
                       </div>
                     )}
@@ -1001,18 +1108,7 @@ export default function Presentation() {
                     slides[slideIndex].examples.length === 1 ? 'max-w-2xl' : 'md:grid-cols-2 max-w-6xl'
                   }`}>
                     {slides[slideIndex].examples.map((ex, idx) => (
-                      <div key={idx} className={`p-7 md:p-8 rounded-3xl border min-h-[230px] w-full ${
-                        slides[slideIndex].theme === 'dark' ? 'bg-white/5 border-white/10' : 
-                        'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
-                      }`}>
-                        <h3 className={`text-lg font-bold flex items-center gap-2 mb-3 ${
-                          slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'
-                        }`}>
-                          <CheckCircle2 className={slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'} size={20} />
-                          {ex.area}
-                        </h3>
-                        {renderExampleText(ex.text, slides[slideIndex].theme === 'dark')}
-                      </div>
+                      <div key={idx}>{renderExampleCard(ex, slides[slideIndex].theme === 'dark', slides[slideIndex].id, true)}</div>
                     ))}
                   </div>
                 )}

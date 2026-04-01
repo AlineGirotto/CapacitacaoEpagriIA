@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ExternalLink, Lightbulb, CheckCircle2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, Lightbulb, CheckCircle2, Coffee, UtensilsCrossed } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { slides } from '../data/slides';
 
@@ -53,8 +53,8 @@ export default function SlideDeck() {
           </div>
         </div>
         
-        {/* Progress Bar */}
-        <div className="hidden md:flex items-center gap-2 text-sm font-medium text-slate-500">
+        {/* Progress Bar with Indicators */}
+        <div className="hidden md:flex items-center gap-3 text-sm font-medium text-slate-500">
           <span>{currentIndex + 1}</span>
           <div className="w-32 h-2 bg-slate-100 rounded-full overflow-hidden">
             <div 

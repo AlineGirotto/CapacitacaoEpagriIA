@@ -33,9 +33,9 @@ export const slides: SlideData[] = [
 
 Prepare-se para uma jornada de **inovação** e **tecnologia**. Vamos explorar juntos como a Inteligência Artificial pode transformar o nosso dia a dia, otimizando processos e ampliando nossa capacidade criativa.
 
-Acesse esta apresentação interativa no seu dispositivo apontando a câmera para o QR Code ou pelo [link direto](https://ai.studio/apps/81e78487-fe32-4d53-949e-62c4a4955544)
+Acesse esta apresentação interativa no seu dispositivo apontando a câmera para o QR Code ou pelo [link direto]( https://alinegirotto.github.io/CapacitacaoEpagriIA/)
     `,
-    qrCode: 'https://ai.studio/apps/81e78487-fe32-4d53-949e-62c4a4955544',
+    qrCode: ' https://alinegirotto.github.io/CapacitacaoEpagriIA/',
     theme: 'dark',
     animationType: 'float',
     backgroundAnimation: 'tech'
@@ -52,7 +52,7 @@ Para isso acesse o QR Code pelo celular e envie sua resposta. Vamos criar uma nu
   [Acesse a atividade](https://app.sli.do/event/ahGxm75pdJVdqjGwmBtWW6)
     `,
     qrCode: 'https://app.sli.do/event/ahGxm75pdJVdqjGwmBtWW6',
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'question'
   },
@@ -72,7 +72,7 @@ Ela não é programada com a resposta final, mas sim treinada para prever o resu
 Hoje, vivemos a revolução das LLMs (Large Language Models). 
 Elas funcionam através de uma arquitetura que permite à IA processar bilhões de palavras e entender o relacionamento e o peso de cada uma em uma frase. 
 A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, prevendo a próxima palavra (token) com base no contexto e na intenção do usuário (prompt).`,
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'none'
   },
@@ -116,7 +116,7 @@ aprender com o histórico e lidar com ambiguidades.
 * Aprende continuamente (Machine Learning) e lida com ambiguidades.
 * *Exemplo:* "Analise a previsão do tempo, a cor da folha (estresse hídrico) e o histórico para ajustar a irrigação dinamicamente."
     `,
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'none'
   },
@@ -130,24 +130,13 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
 * **Privacidade e Confidencialidade:** O contrato Google Enterprise da EPAGRI assegura que nossos dados institucionais **não** são utilizados para treinar os modelos públicos. O ambiente se torna "isolado e seguro", mas é fundamental evitar o compartilhamento de informações sensíveis ou pessoais em prompts.
 * **Risco de Alucinação:** A IA é probabilística, não um banco de dados exato. Ela pode inventar dados, leis, referências bibliográficas ou fatos históricos com muita convicção.
 * **LGPD e Viés Algorítmico:** Modelos de IA podem refletir e amplificar preconceitos presentes nos dados de treinamento. Tenha cuidado redobrado ao processar dados sensíveis, informações pessoais ou ao tomar decisões que afetem cidadãos.
+* **Direitos Autorais e Propriedade Intelectual:** A IA pode gerar conteúdo que infringe direitos autorais ou que é baseado em obras protegidas. Sempre verifique a origem e a legalidade do material gerado, especialmente para publicações oficiais.
 * **Responsabilidade Humana:** A IA é um copiloto, um suporte avançado. A responsabilidade legal, técnica e moral pelo conteúdo gerado e pelas decisões tomadas é sempre do profissional (Pesquisador, Extensionista, Analista).
-* **Regras de Ouro:** *Confie no potencial para rascunhar e idealizar, mas sempre verifique a informação final!* 
     `,
     spotlightQuote: 'IA sugere, o humano decide.',
     theme: 'accent',
     animationType: 'pulse',
     backgroundAnimation: 'none'
-  },
-  {
-    id: 'coffee-1',
-    title: 'Coffee Break',
-    subtitle: 'Intervalo',
-    content: `
-Pausa para um café, uma água e networking. Aproveite para recarregar as energias!
-    `,
-    theme: 'dark',
-    animationType: 'bounce',
-    backgroundAnimation: 'coffee'
   },
   {
     id: 'prompts-intro',
@@ -165,9 +154,9 @@ Mude a mentalidade de "escrever" para "especificar". Em essência, é a instruç
 * **Cadeia de Pensamento (Chain-of-thought):** Inclui a instrução para a IA *"Pensar passo a passo"* antes de responder, o que a força a desenvolver a lógica interna e reduz erros.
 * **Do Menor para o Maior (Least-to-most):** Envolve a divisão de um problema complexo em subproblemas ou etapas menores (Exemplo: *"Primeiro liste os requisitos legais, depois analise o edital"*).
     `,
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'prompt'
   },
   {
     id: 'prompts-formulas-1',
@@ -202,9 +191,9 @@ Veja abaixo duas fórmulas simples para montar prompts mais claros e úteis no d
         ],
       },
     ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'float',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'prompt'
   },
   {
     id: 'prompts-formulas-2',
@@ -251,9 +240,9 @@ Estas três fórmulas ajudam quando você precisa padronizar respostas, organiza
         ],
       },
     ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'prompt'
   },
   {
     id: 'minilab-1',
@@ -276,23 +265,12 @@ Vamos criar prompts estruturados para as diferentes áreas da EPAGRI utilizando 
     examples: [
       { area: 'RH', text: 'PTF: Você é um analista de RH da EPAGRI. Crie um comunicado interno sobre capacitação em IA para os colaboradores. Em um e-mail formal, objetivo, com assunto e 3 orientações principais.' },
       { area: 'Financeiro', text: 'FOCO: Seu foco são despesas de viagem por regional. Identifique padrões de gasto e oportunidades de economia. Use dados consolidados do último trimestre. Construa um resumo em 5 bullets com linguagem executiva.' },
-      { area: 'Contratos', text: 'PTF: Você é um servidor que atua com contratos administrativos. Elabore um checklist inicial para revisar uma minuta contratual. Em formato de lista numerada, linguagem clara, destacando atenção a prazos, penalidades e fiscalização.' },
+      { area: 'Contratos', text: 'PTF: Você é um empregado que atua com contratos administrativos. Elabore um checklist inicial para revisar uma minuta contratual. Em formato de lista numerada, linguagem clara, destacando atenção a prazos, penalidades e fiscalização.' },
       { area: 'Administrativo', text: 'FOCO: Organize as demandas recebidas por e-mail. Seu objetivo é priorizar atendimentos por urgência e assunto. Considere mensagens de setores internos da EPAGRI ao longo da semana. Gere uma tabela com colunas "prioridade", "tema" e "ação sugerida".' }
     ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'float',
     backgroundAnimation: 'minilab'
-  },
-  {
-    id: 'almoco-1',
-    title: 'Almoço',
-    subtitle: 'Intervalo',
-    content: `
-Bom apetite! Retornamos em breve para a segunda parte da nossa capacitação.
-    `,
-    theme: 'dark',
-    animationType: 'bounce',
-    backgroundAnimation: 'lunch'
   },
   {
     id: 'notebooklm',
@@ -320,7 +298,7 @@ Veja alguns cenários em que o NotebookLM pode apoiar diferentes áreas com mais
         text: 'Monte uma base com manuais internos, orientações e documentos institucionais. A partir disso, peça resumos, extração de pontos-chave e respostas para dúvidas operacionais.',
       },
     ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'none'
   },
@@ -342,7 +320,7 @@ Vamos baixar os arquivos de referência, subir no NotebookLM e usar esse materia
       { area: 'Passo 1', text: 'Baixe os dois arquivos indicados no slide e faça o upload deles no NotebookLM para montar a base de consulta.' },
       { area: 'Passo 2', text: 'Faremos perguntas sobre os documentos carregados para extrair informações relevantes. Pergunte sobre as atribuições do seu cargo ou do seu departamento estadual.' },
 ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'float',
     backgroundAnimation: 'minilab'
   },
@@ -362,20 +340,9 @@ O Gem do Google é um agente personalizado que pode ser treinado com dados espec
       { area: 'Marketing', text: 'Um Gem "Revisor Técnico" que sempre ajusta textos para a linguagem padrão de publicações da EPAGRI.' },
       { area: 'Financeiro', text: 'Um Gem voltado para apoiar a leitura de normativos internos, resumir orientações recorrentes e sugerir rascunhos de explicação sobre rotinas de prestação de contas e despesas.' }
     ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'pulse',
     backgroundAnimation: 'none'
-  },
-  {
-    id: 'coffee-2',
-    title: 'Coffee Break',
-    subtitle: 'Intervalo Técnico',
-    content: `
-Pausa rápida para um café. Voltamos em breve!
-    `,
-    theme: 'dark',
-    animationType: 'bounce',
-    backgroundAnimation: 'coffee'
   },
   {
     id: 'minilab-4',
@@ -422,7 +389,7 @@ A IA já está embutida no Google Workspace, trazendo funcionalidades avançadas
       { title: 'Gmail', url: 'https://mail.google.com', icon: 'mail' },
       { title: 'Google Docs', url: 'https://docs.google.com', icon: 'file-text' }
     ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'google'
   },
@@ -448,20 +415,9 @@ A IA também potencializa a análise de dados e a criação de conteúdo visual,
       { title: 'Google Sheets', url: 'https://sheets.google.com', icon: 'grid' },
       { title: 'Google Slides', url: 'https://slides.google.com', icon: 'presentation' }
     ],
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'google'
-  },
-  {
-    id: 'coffee-3',
-    title: 'Coffee Break',
-    subtitle: 'Intervalo de Integração',
-    content: `
-Pausa para um café e networking. Voltamos em breve!
-    `,
-    theme: 'dark',
-    animationType: 'bounce',
-    backgroundAnimation: 'coffee'
   },
   {
     id: 'panorama-1',
@@ -474,7 +430,7 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 * **DALL-E 3 (OpenAI):** Integrado ao ecossistema Microsoft e ChatGPT. Preciso em seguir instruções complexas e renderizar textos legíveis nas imagens.
 * **Adobe Firefly:** A escolha para compliance e segurança jurídica. Treinado em bancos de imagens licenciadas (Adobe Stock), garantindo que não infrinjam direitos autorais.
     `,
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'none'
   },
@@ -517,7 +473,7 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 * **Tome:** Focado em "storytelling" assistido por IA.
 * **Prezi AI:** Estruturas de zoom e mapas mentais dinâmicos a partir de textos.
     `,
-    theme: 'light',
+    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'none'
   },
@@ -537,46 +493,22 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 **Para Financeiro e Compras:**
 * **ChatPDF / AskYourPDF:** Analisa rapidamente editais de licitação volumosos, buscando palavras-chave e prazos.
     `,
-    theme: 'dark',
+    theme: 'accent',
     animationType: 'pulse',
     backgroundAnimation: 'none'
   },
   {
-    id: 'oficina-1',
-    title: 'Oficina de Projetos',
-    subtitle: 'Definição de Problemas',
-    content: `
-**Definição de problemas reais por grupo/setor.**
-
-Reúnam-se em grupos por área de atuação ou afinidade.
-
-Identifiquem um "gargalo" ou tarefa repetitiva do setor que pode ser resolvido com inteligência artificial. Pensem em algo que tome tempo, seja complexo ou que exija análises demoradas ou repetitivas de informações.
-    `,
-    theme: 'light',
-    animationType: 'float',
-    backgroundAnimation: 'none'
-  },
-  {
-    id: 'almoco-2',
-    title: 'Almoço',
-    subtitle: 'Intervalo',
-    content: `
-**Bom apetite!** Retornamos para o laboratório final após o almoço.
-    `,
-    theme: 'dark',
-    animationType: 'bounce',
-    backgroundAnimation: 'lunch'
-  },
-  {
-    id: 'oficina-2',
+    id: 'oficina',
     title: 'Oficina de Projetos',
     subtitle: 'Laboratório Final',
     content: `
 **Desenvolvimento da solução.**
 
-Desenvolvam uma solução utilizando o **Gemini, Gem** e/ou o **NotebookLM**.
+Reúnam-se em grupos por área de atuação ou afinidade.
 
-Preparem uma apresentação rápida (Showcase) demonstrando:
+Identifiquem um "gargalo" ou tarefa repetitiva do setor que pode ser resolvido com inteligência artificial. Pensem em algo que tome tempo, seja complexo ou que exija análises demoradas ou repetitivas de informações.
+
+Desenvolvam uma solução utilizando o **Gemini, Gem** e/ou o **NotebookLM** e preparem uma apresentação rápida *(Showcase)* demonstrando:
 * Qual era o problema?
 * Como a IA foi aplicada?
 * Qual o resultado esperado ou ganho de tempo?
@@ -584,17 +516,6 @@ Preparem uma apresentação rápida (Showcase) demonstrando:
     theme: 'accent',
     animationType: 'pulse',
     backgroundAnimation: 'challenge'
-  },
-  {
-    id: 'pausa-rapida',
-    title: 'Pausa Rápida',
-    subtitle: 'Preparação Final',
-    content: `
-Pausa rápida para organização. Em seguida, iniciaremos as apresentações dos projetos!
-    `,
-    theme: 'dark',
-    animationType: 'bounce',
-    backgroundAnimation: 'coffee'
   },
   {
     id: 'showcase',
@@ -607,7 +528,7 @@ Chegou a hora de compartilhar as soluções desenvolvidas com a turma! Cada grup
 
 **Lembre-se:** o objetivo é mostrar o potencial da IA para transformar processos e otimizar o trabalho na EPAGRI. Sejam criativos e aproveitem para inspirar os colegas!
  `,
-    theme: 'light',
+    theme: 'accent',
     animationType: 'float',
     backgroundAnimation: 'handson'
   },
@@ -625,7 +546,7 @@ O DEGTI está à disposição para apoiar a implementação dos projetos e para 
     examples: [
       { area: 'Dúvidas e Suporte', text: 'Equipe DEGTI\n\nE-mail: desenvolvimento@epagri.sc.gov.br\nalinegirotto@epagri.sc.gov.br\n\nTelefone: (48) 3665-5403\nRamal: 55403\n\nEstamos à disposição para apoiar a implementação dos seus projetos com IA!' }
     ],
-    theme: 'accent',
+    theme: 'dark',
     animationType: 'pulse',
     backgroundAnimation: 'celebration'
   },
@@ -646,6 +567,28 @@ Acesse o QR Code no seu celular e responda nosso formulário de avaliação. Seu
     theme: 'dark',
     animationType: 'float',
     backgroundAnimation: 'celebration'
-  }
+  },
+  {
+    id: 'coffee',
+    title: 'Coffee Break',
+    subtitle: 'Intervalo de Integração',
+    content: `
+Pausa para um café e networking. Voltamos em breve!
+    `,
+    theme: 'dark',
+    animationType: 'bounce',
+    backgroundAnimation: 'coffee'
+  },
+  {
+    id: 'almoco',
+    title: 'Almoço',
+    subtitle: 'Intervalo',
+    content: `
+**Bom apetite!** Retornamos após o almoço.
+    `,
+    theme: 'dark',
+    animationType: 'bounce',
+    backgroundAnimation: 'lunch'
+  },
 ];
 

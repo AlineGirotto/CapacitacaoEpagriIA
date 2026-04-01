@@ -71,6 +71,7 @@ const BackgroundAnimation = ({ type }: { type?: string }) => {
   if (type === 'celebration') icons = ['🎉', '🥳', '🎊', '🍾', '🎈'];
   if (type === 'google') icons = ['📱', '💻', '☁️', '🤖', '🌐'];
   if (type === 'question') icons = ['❓', '❔', '🤔', '💭', '🧐'];
+  if (type === 'prompt') icons = ['💬', '📝', '✍️', '⚙️', '📰'];
 
   if (icons.length === 0) return null;
 
@@ -303,35 +304,50 @@ export default function Presentation() {
 
   const renderSpotlightQuote = (quote: string, isDark: boolean) => (
     <motion.div
-      initial={{ opacity: 0, x: 70, scale: 0.85, rotate: -2 }}
+      initial={{ opacity: 0, x: 70, scale: 0.88, rotate: -2 }}
       whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
       viewport={{ once: true }}
       animate={{
-        y: [0, -6, 0],
-        scale: [1, 1.03, 1],
+        y: [0, -4, 0],
         boxShadow: [
-          '0 0 0px rgba(237,28,36,0.10)',
-          '0 0 28px rgba(237,28,36,0.45)',
-          '0 0 8px rgba(166,206,57,0.35)',
-          '0 0 0px rgba(237,28,36,0.10)',
+          '0 0 0px rgba(0,0,0,0)',
+          '0 0 16px rgba(237,28,36,0.58), 0 0 42px rgba(166,206,57,0.35)',
+          '0 0 26px rgba(237,28,36,0.82), 0 0 70px rgba(166,206,57,0.56)',
+          '0 0 14px rgba(237,28,36,0.52), 0 0 38px rgba(166,206,57,0.36)',
         ],
       }}
       transition={{
         x: { duration: 0.55, ease: 'easeOut' },
         opacity: { duration: 0.55, ease: 'easeOut' },
-        scale: { duration: 1.4, repeat: Infinity, ease: 'easeInOut' },
-        y: { duration: 1.9, repeat: Infinity, ease: 'easeInOut' },
-        boxShadow: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
+        y: { duration: 3.2, repeat: Infinity, ease: 'easeInOut' },
+        boxShadow: { duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
       }}
-      className={`mt-4 ml-auto w-fit max-w-full rounded-2xl border px-5 py-3 text-right ${
+      className={`mt-8 md:mt-10 ml-auto w-fit max-w-full rounded-xl border-2 px-6 py-3 text-right backdrop-blur-sm ${
         isDark
-          ? 'border-epagri-olive/40 bg-white/10 text-white'
-          : 'border-epagri-red/30 bg-white text-epagri-dark'
+          ? 'border-epagri-olive/80 bg-black/45'
+          : 'border-epagri-red/80 bg-slate-900/90'
       }`}
+      style={{
+        transformOrigin: 'right center',
+      }}
     >
-      <p className="font-display text-xl md:text-2xl font-extrabold tracking-tight">
+      <motion.p
+        className="font-display text-xl md:text-2xl font-black tracking-[0.08em] uppercase"
+        animate={{
+          opacity: [1, 0.92, 1, 0.86, 1],
+          textShadow: [
+            '0 0 4px rgba(255,255,255,0.95), 0 0 10px rgba(237,28,36,0.9), 0 0 22px rgba(237,28,36,0.8), 0 0 38px rgba(166,206,57,0.58)',
+            '0 0 2px rgba(255,255,255,0.82), 0 0 8px rgba(237,28,36,0.65), 0 0 16px rgba(237,28,36,0.55), 0 0 26px rgba(166,206,57,0.38)',
+            '0 0 4px rgba(255,255,255,1), 0 0 12px rgba(237,28,36,1), 0 0 28px rgba(237,28,36,0.9), 0 0 44px rgba(166,206,57,0.68)',
+            '0 0 1px rgba(255,255,255,0.72), 0 0 6px rgba(237,28,36,0.5), 0 0 14px rgba(237,28,36,0.45), 0 0 22px rgba(166,206,57,0.3)',
+            '0 0 4px rgba(255,255,255,0.95), 0 0 10px rgba(237,28,36,0.9), 0 0 22px rgba(237,28,36,0.8), 0 0 38px rgba(166,206,57,0.58)',
+          ],
+        }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ color: '#fff6ff' }}
+      >
         {quote}
-      </p>
+      </motion.p>
     </motion.div>
   );
 

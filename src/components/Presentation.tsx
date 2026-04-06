@@ -79,6 +79,7 @@ const BackgroundAnimation = ({
   if (type === 'google') icons = ['📱', '💻', '☁️', '🤖', '🌐'];
   if (type === 'question') icons = ['❓', '❔', '🤔', '💭', '🧐'];
   if (type === 'prompt') icons = ['💬', '📝', '✍️', '⚙️', '📰'];
+  if (type === 'marketplace') icons = ['🛒', '🏢', '💰', '📦', '🛍️'];
 
   if (!useToolLogos && icons.length === 0) return null;
 
@@ -257,6 +258,45 @@ export default function Presentation() {
       default: return { opacity: 1, y: 0 };
     }
   };
+
+  const renderLinksWithQRCodes = (links: { title: string; url: string; icon: string }[], isDark: boolean) => (
+    <div className="mt-12 w-full flex justify-center px-4">
+      <div className="flex gap-6 w-full overflow-x-auto pb-4">
+        {links.map((link) => (
+          <motion.div
+            key={link.url}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className={`rounded-2xl border p-8 flex flex-col items-center justify-center text-center flex-shrink-0 w-56 ${
+              isDark ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-lg shadow-slate-200/30'
+            }`}
+          >
+            <h4 className={`text-sm md:text-base font-bold mb-6 line-clamp-2 ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
+              {link.title}
+            </h4>
+            <div className="bg-white p-4 rounded-lg shadow-inner mb-6 flex items-center justify-center">
+              <QRCode value={link.url} size={160} level="H" />
+            </div>
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 px-4 py-2.5 text-sm rounded-full font-semibold transition-all ${
+                isDark
+                  ? 'bg-epagri-olive text-epagri-dark hover:bg-epagri-olive/80'
+                  : 'bg-epagri-green text-white hover:bg-epagri-green/90'
+              }`}
+            >
+              <ExternalLink size={16} />
+              <span>Acessar</span>
+            </a>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
 
   const renderSidebar = (slide: typeof slides[0], isDark: boolean) => (
     <div className="space-y-6 sticky top-28">
@@ -709,9 +749,6 @@ export default function Presentation() {
               {isDark && (
                 <div className="absolute top-0 right-0 w-96 h-96 bg-epagri-green rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3"></div>
               )}
-              {isAccent && (
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-epagri-olive rounded-full blur-3xl opacity-20 translate-y-1/3 -translate-x-1/4"></div>
-              )}
 
               <motion.div
                 initial={getInitialAnimation(slide.animationType)}
@@ -760,7 +797,7 @@ export default function Presentation() {
 
                 {/* Section Body */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-                  <div className={slide.links || slide.qrCode ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
+                  <div className={(slide.links || slide.qrCode) && slide.id !== 'materiais' ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
                     <div className={`prose prose-base md:prose-lg max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
                       isDark ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200' : 
                       'prose-slate prose-headings:text-epagri-dark prose-a:text-epagri-green hover:prose-a:text-epagri-dark prose-strong:text-slate-900'
@@ -872,10 +909,12 @@ export default function Presentation() {
                         ))}
                       </div>
                     )}
+
+                    {slide.id === 'materiais' && slide.links && renderLinksWithQRCodes(slide.links, isDark)}
                   </div>
 
-                  {/* Sidebar (Links or QRCode only) */}
-                  {(slide.links || slide.qrCode) && (
+                  {/* Sidebar (Links or QRCode only) - não exibe no slide de materiais */}
+                  {(slide.links || slide.qrCode) && slide.id !== 'materiais' && (
                     <div className="lg:col-span-5 xl:col-span-4">
                       {renderSidebar(slide, isDark)}
                     </div>
@@ -918,9 +957,6 @@ export default function Presentation() {
             {/* Decorative elements */}
             {slides[slideIndex].theme === 'dark' && (
               <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-epagri-green rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-            )}
-            {slides[slideIndex].theme === 'accent' && (
-              <div className="absolute bottom-0 left-0 w-[30vw] h-[30vw] bg-epagri-olive rounded-full blur-3xl opacity-20 translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
             )}
 
             <div className="max-w-7xl mx-auto w-full px-8 md:px-16 py-12 relative z-10 flex-1 flex flex-col justify-center">
@@ -981,7 +1017,7 @@ export default function Presentation() {
 
                 {/* Section Body */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-                  <div className={slides[slideIndex].links || slides[slideIndex].qrCode ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
+                  <div className={(slides[slideIndex].links || slides[slideIndex].qrCode) && slides[slideIndex].id !== 'materiais' ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
                     <div className={`prose prose-lg md:prose-xl max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
                       slides[slideIndex].theme === 'dark' ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200' : 
                       'prose-slate prose-headings:text-epagri-dark prose-a:text-epagri-green hover:prose-a:text-epagri-dark prose-strong:text-slate-900'
@@ -1093,10 +1129,12 @@ export default function Presentation() {
                         ))}
                       </div>
                     )}
+
+                    {slides[slideIndex].id === 'materiais' && slides[slideIndex].links && renderLinksWithQRCodes(slides[slideIndex].links, slides[slideIndex].theme === 'dark')}
                   </div>
 
-                  {/* Sidebar */}
-                  {(slides[slideIndex].links || slides[slideIndex].qrCode) && (
+                  {/* Sidebar - não exibe no slide de materiais */}
+                  {(slides[slideIndex].links || slides[slideIndex].qrCode) && slides[slideIndex].id !== 'materiais' && (
                     <div className="lg:col-span-5 xl:col-span-4">
                       {renderSidebar(slides[slideIndex], slides[slideIndex].theme === 'dark')}
                     </div>

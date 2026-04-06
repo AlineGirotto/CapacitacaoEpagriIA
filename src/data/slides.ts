@@ -1,4 +1,4 @@
-export interface SlideData {
+﻿export interface SlideData {
   id: string;
   title: string;
   subtitle: string;
@@ -18,7 +18,7 @@ export interface SlideData {
   theme?: 'light' | 'dark' | 'accent';
   qrCode?: string;
   animationType?: 'fade' | 'slide' | 'pulse' | 'bounce' | 'float';
-  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google' | 'celebration' | 'question' | 'none';
+  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google' | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'none';
   logos?: { name: string; image: string }[];
   timeline?: { year: string; title: string; description: string }[];
 }
@@ -27,7 +27,7 @@ export const slides: SlideData[] = [
   {
     id: 'welcome',
     title: 'IA na Prática: Ecossistema Google e Produtividade',
-    subtitle: 'Boas-vindas, Equipe EPAGRI! 🚀',
+    subtitle: 'Boas-vindas, Epagrianos! 🚀',
     content: `
 ### Estamos muito felizes em ter você aqui! 🌟
 
@@ -45,14 +45,14 @@ Acesse esta apresentação interativa no seu dispositivo apontando a câmera par
     title: 'O que é Inteligência Artificial?',
     subtitle: 'Questionamento',
     content: `
-Antes de mergulharmos no universo da IA, resuma em até 4 palavras o que você entende por "Inteligência Artificial".
+Antes de mergulharmos no universo da IA, resuma em **até 4 palavras** o que você entende por "Inteligência Artificial".
 
 Para isso acesse o QR Code pelo celular e envie sua resposta. Vamos criar uma nuvem de palavras com as respostas da turma para visualizar a percepção geral sobre o tema!
 
   [Acesse a atividade](https://app.sli.do/event/ahGxm75pdJVdqjGwmBtWW6)
     `,
     qrCode: 'https://app.sli.do/event/ahGxm75pdJVdqjGwmBtWW6',
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
     backgroundAnimation: 'question'
   },
@@ -63,7 +63,7 @@ Para isso acesse o QR Code pelo celular e envie sua resposta. Vamos criar uma nu
     content: `
 A Inteligência Artificial Generativa não veio para substituir, mas para **amplificar a nossa capacidade técnica**. Nosso foco será em ferramentas corporativas que garantem a segurança e a governança dos dados da EPAGRI.
 
-### O que é a IA?
+### O que é a Inteligência Artificial (IA)?
 A Inteligência Artificial é um campo da Ciência da Computação que busca criar sistemas capazes de realizar tarefas que, até então, exigiam a cognição humana. 
 Diferente do software tradicional, a IA utiliza modelos matemáticos e estatísticos para aprender com grandes volumes de dados. 
 Ela não é programada com a resposta final, mas sim treinada para prever o resultado mais provável com base em padrões históricos.
@@ -72,7 +72,7 @@ Ela não é programada com a resposta final, mas sim treinada para prever o resu
 Hoje, vivemos a revolução das LLMs (Large Language Models). 
 Elas funcionam através de uma arquitetura que permite à IA processar bilhões de palavras e entender o relacionamento e o peso de cada uma em uma frase. 
 A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, prevendo a próxima palavra (token) com base no contexto e na intenção do usuário (prompt).`,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
     backgroundAnimation: 'question'
   },
@@ -92,7 +92,7 @@ A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, preve
       { year: '2022', title: 'Boom da IA Generativa', description: 'Lançamento do ChatGPT populariza a IA Generativa para o público em geral, mudando a interação humano-máquina.' },
       { year: 'Hoje', title: 'Era Multimodal', description: 'Modelos avançados como o Google Gemini processam e geram texto, áudio, imagem e vídeo de forma nativa e integrada.' }
     ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'float',
     backgroundAnimation: 'none'
   },
@@ -116,7 +116,7 @@ aprender com o histórico e lidar com ambiguidades.
 * Aprende continuamente (Machine Learning) e lida com ambiguidades.
 * *Exemplo:* "Analise a previsão do tempo, a cor da folha (estresse hídrico) e o histórico para ajustar a irrigação dinamicamente."
     `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
     backgroundAnimation: 'none'
   },
@@ -135,7 +135,7 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
 * **Responsabilidade Humana:** A IA é um copiloto, um suporte avançado. A responsabilidade legal, técnica e moral pelo conteúdo gerado e pelas decisões tomadas é sempre do profissional (Pesquisador, Extensionista, Analista).
     `,
     spotlightQuote: 'IA sugere, o humano decide.',
-    theme: 'accent',
+    theme: 'light',
     animationType: 'pulse',
     backgroundAnimation: 'none'
   },
@@ -149,13 +149,13 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
 Mude a mentalidade de "escrever" para "especificar". Em essência, é a instrução, pergunta ou contexto que você fornece a um modelo de IA para obter uma resposta, realizar uma tarefa ou gerar conteúdo específico.
 
 **Técnicas de Prompt (Como a IA processa a solicitação):**
-* **Prompt por Função (Role-prompting):** Define um papel específico para a IA para direcionar o tom e o conteúdo da resposta (Exemplo: *"Aja como um Auditor do Tribunal de Contas"*).
+* **Prompt por Função (Role-prompting):** Define um papel específico para a IA para direcionar o tom e o conteúdo da resposta (Exemplo: *"Aja como um Analista Administrativo Financeiro"*).
 * **Prompt sem Exemplos (Zero-shot):** Solicitação direta sem fornecer exemplos prévios (Exemplo: *"Liste as pragas da maçã"*).
-* **Prompt com Poucos Exemplos (Few-shot):** Inclui 2 ou 3 exemplos de um padrão ou formato desejado antes da solicitação final para calibrar a IA.
-* **Cadeia de Pensamento (Chain-of-thought):** Inclui a instrução para a IA *"Pensar passo a passo"* antes de responder, o que a força a desenvolver a lógica interna e reduz erros.
+* **Prompt com Poucos Exemplos (Few-shot):** Inclui 2 ou 3 exemplos de um padrão ou formato desejado antes da solicitação final para calibrar a IA. (Exemplo: *"Exemplo 1: Praga - Ferrugem, Controle - Fungicida. Exemplo 2: Praga - Pulgão, Controle - Inseticida. Agora liste outras pragas da soja da mesma forma"*).
+* **Cadeia de Pensamento (Chain-of-thought):** Inclui a instrução para a IA *"Pensar passo a passo"* antes de responder, o que a força a desenvolver a lógica interna e reduz erros. (Exemplo: *"Liste os passos para elaborar um ETP, pensando passo a passo"*).
 * **Do Menor para o Maior (Least-to-most):** Envolve a divisão de um problema complexo em subproblemas ou etapas menores (Exemplo: *"Primeiro liste os requisitos legais, depois analise o edital"*).
     `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
     backgroundAnimation: 'prompt'
   },
@@ -192,7 +192,7 @@ Veja abaixo duas fórmulas simples para montar prompts mais claros e úteis no d
         ],
       },
     ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'float',
     backgroundAnimation: 'prompt'
   },
@@ -241,7 +241,7 @@ Estas três fórmulas ajudam quando você precisa padronizar respostas, organiza
         ],
       },
     ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
     backgroundAnimation: 'prompt'
   },
@@ -269,7 +269,7 @@ Vamos criar prompts estruturados para as diferentes áreas da EPAGRI utilizando 
       { area: 'Contratos', text: 'PTF: Você é um empregado que atua com contratos administrativos. Elabore um checklist inicial para revisar uma minuta contratual. Em formato de lista numerada, linguagem clara, destacando atenção a prazos, penalidades e fiscalização.' },
       { area: 'Administrativo', text: 'FOCO: Organize as demandas recebidas por e-mail. Seu objetivo é priorizar atendimentos por urgência e assunto. Considere mensagens de setores internos da EPAGRI ao longo da semana. Gere uma tabela com colunas "prioridade", "tema" e "ação sugerida".' }
     ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'float',
     backgroundAnimation: 'minilab'
   },
@@ -299,7 +299,7 @@ Veja alguns cenários em que o NotebookLM pode apoiar diferentes áreas com mais
         text: 'Monte uma base com manuais internos, orientações e documentos institucionais. A partir disso, peça resumos, extração de pontos-chave e respostas para dúvidas operacionais.',
       },
     ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
     backgroundAnimation: 'notebook'
   },
@@ -321,7 +321,7 @@ Vamos baixar os arquivos de referência, subir no NotebookLM e usar esse materia
       { area: 'Passo 1', text: 'Baixe os dois arquivos indicados no slide e faça o upload deles no NotebookLM para montar a base de consulta.' },
       { area: 'Passo 2', text: 'Faremos perguntas sobre os documentos carregados para extrair informações relevantes. Pergunte sobre as atribuições do seu cargo ou do seu departamento estadual.' },
 ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'float',
     backgroundAnimation: 'notebook'
   },
@@ -341,7 +341,7 @@ O Gem do Google é um agente personalizado que pode ser treinado com dados espec
       { area: 'Marketing', text: 'Um Gem "Revisor Técnico" que sempre ajusta textos para a linguagem padrão de publicações da EPAGRI.' },
       { area: 'Financeiro', text: 'Um Gem voltado para apoiar a leitura de normativos internos, resumir orientações recorrentes e sugerir rascunhos de explicação sobre rotinas de prestação de contas e despesas.' }
     ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'pulse',
     backgroundAnimation: 'gemini'
   },
@@ -363,9 +363,44 @@ Vamos explorar como usar as duas ferramentas em conjunto para potencializar a an
       { area: 'Passo 1', text: 'Baixe os dois arquivos indicados no slide e faça o upload deles no Gemini para montar a base de consulta.' },
       { area: 'Passo 2', text: 'Vamos pedir para gerar um relatório com as atribuições do seu cargo ou do seu departamento estadual.' },
 ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'float',
     backgroundAnimation: 'gemini'
+  },
+  {
+    id: 'materiais',
+    title: 'Extra',
+    subtitle: 'Materiais e Ferramentas Adicionais',
+    content: `
+**Recursos adicionais para explorar:**
+
+Visando apoiar a continuidade do aprendizado e a implementação prática da IA na EPAGRI, aqui estão alguns recursos extras que podem ser úteis para aprofundar seus conhecimentos e experimentar novas ferramentas:
+    `,
+    links: [
+      {
+        title: 'EpagrIA',
+        url: 'https://epagria.epagri.sc.gov.br/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Guia de TR e ETP',
+        url: 'https://gemini.google.com/gem/185MSs-9-RLJi-aDDd5mAI-z12C1gqGiF?usp=sharing',
+        icon: 'file-text',
+      },
+      {
+        title: 'Engenheiro de Prompts',
+        url: 'https://gemini.google.com/gem/1Igx7Igc1yoWnvEAXBvO6mTY-Ck5fyzTl?usp=sharing',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Guia de Prompts Gemini',
+        url: 'https://drive.google.com/file/d/1O7fp1QKvzc3NB1BT_msGx8LeLJSV5mU5/view?usp=sharing',
+        icon: 'download',
+      },
+    ],
+    theme: 'light',
+    animationType: 'pulse',
+    backgroundAnimation: 'question'
   },
   {
     id: 'workspace-text',
@@ -388,9 +423,9 @@ A IA já está embutida no Google Workspace, trazendo funcionalidades avançadas
     `,
     links: [
       { title: 'Gmail', url: 'https://mail.google.com', icon: 'mail' },
-      { title: 'Google Docs', url: 'https://docs.google.com', icon: 'file-text' }
+      { title: 'Google Docs', url: 'https://docs.google.com/document/d/1dBQyBGN5EXjvkk7Yf0GyVAVaBCF81AeipVvJgm1Pbvs/edit?usp=sharing', icon: 'file-text' }
     ],
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
     backgroundAnimation: 'google'
   },
@@ -413,10 +448,9 @@ A IA também potencializa a análise de dados e a criação de conteúdo visual,
 * Criação de layouts e designs personalizados.
     `,
     links: [
-      { title: 'Google Sheets', url: 'https://sheets.google.com', icon: 'grid' },
-      { title: 'Google Slides', url: 'https://slides.google.com', icon: 'presentation' }
+      { title: 'Google Sheets', url: 'https://docs.google.com/spreadsheets/d/1GTKRDexgP9i6Jr4GnDGCq6oWeZhTUItXqd6orITYZCI/edit?usp=sharing', icon: 'grid' },
+      { title: 'Google Slides', url: 'https://docs.google.com/presentation/d/1Pdu9qpIxWqU5iqJC5LVW2nKyt2Y2jeKF_PEK4uwzc18/edit?usp=sharing', icon: 'presentation' }
     ],
-    theme: 'accent',
     animationType: 'slide',
     backgroundAnimation: 'google'
   },
@@ -431,9 +465,9 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 * **DALL-E 3 (OpenAI):** Integrado ao ecossistema Microsoft e ChatGPT. Preciso em seguir instruções complexas e renderizar textos legíveis nas imagens.
 * **Adobe Firefly:** A escolha para compliance e segurança jurídica. Treinado em bancos de imagens licenciadas (Adobe Stock), garantindo que não infrinjam direitos autorais.
     `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'marketplace'
   },
   {
     id: 'panorama-2',
@@ -450,9 +484,9 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 * **Luma Dream Machine:** Acessível e de alta qualidade. Útil para animar fotos históricas.
 * **Kling AI:** Potente para movimentos complexos e vídeos longos (até 2 minutos), ideal para tutoriais.
     `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'float',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'marketplace'
   },
   {
     id: 'panorama-3',
@@ -474,9 +508,9 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 * **n8n:** Alternativa poderosa com instalação em servidores próprios (self-hosted).
 * **Zapier:** Líder em integrações simples e ecossistema de apps.
     `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'slide',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'marketplace'
   },
   {
     id: 'panorama-4',
@@ -497,9 +531,9 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
 * **Alice (CGU):** Ferramenta desenvolvida pela Controladoria-Geral da União que usa IA para analisar editais e atas de registro de preços, identificando riscos de irregularidades ou sobrepreço automaticamente.
 
     `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'pulse',
-    backgroundAnimation: 'none'
+    backgroundAnimation: 'marketplace'
   },
   {
     id: 'oficina',
@@ -517,7 +551,7 @@ Desenvolvam uma solução utilizando o **Gemini, Gem** e/ou o **NotebookLM** e p
 * Como a IA foi aplicada?
 * Qual o resultado esperado ou ganho de tempo?
     `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'pulse',
     backgroundAnimation: 'challenge'
   },
@@ -532,7 +566,7 @@ Chegou a hora de compartilhar as soluções desenvolvidas com a turma! Cada grup
 
 **Lembre-se:** o objetivo é mostrar o potencial da IA para transformar processos e otimizar o trabalho na EPAGRI. Sejam criativos e aproveitem para inspirar os colegas!
  `,
-    theme: 'accent',
+    theme: 'light',
     animationType: 'float',
     backgroundAnimation: 'handson'
   },

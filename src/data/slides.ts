@@ -18,7 +18,7 @@
   theme?: 'light' | 'dark' | 'accent';
   qrCode?: string;
   animationType?: 'fade' | 'slide' | 'pulse' | 'bounce' | 'float';
-  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google' | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'none';
+  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google' | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'notebook' | 'none';
   logos?: { name: string; image: string }[];
   timeline?: { year: string; title: string; description: string }[];
 }
@@ -572,14 +572,15 @@ Chegou a hora de compartilhar as soluções desenvolvidas com a turma! Cada grup
   },
   {
     id: 'celebration',
-    title: 'Parabéns a Todos!',
+    title: 'Parabéns a Todos! 🎉🥳',
     subtitle: 'Encerramento',
     content: `
-**Parabéns a todos pela participação e pelo empenho em aprender a aplicar Inteligência Artificial no seu trabalho! 🎉**
 
 O futuro é promissor e cheio de possibilidades. Continuem explorando, experimentando e inovando com as ferramentas que conhecemos hoje. O conhecimento é o primeiro passo para a transformação na EPAGRI!
 
-O DEGTI está à disposição para apoiar a implementação dos projetos e para continuar essa jornada. **Muito obrigado a todos!**
+O DEGTI está à disposição para apoiar a implementação dos projetos e para continuar essa jornada. 
+
+**Muito obrigado a todos!**
 `,
     examples: [
       { area: 'Dúvidas e Suporte', text: 'Equipe DEGTI e DEPLAN\n\ndesenvolvimento@epagri.sc.gov.br\nplanejamento@epagri.sc.gov.br\nalinegirotto@epagri.sc.gov.br\n	humbertoneto@epagri.sc.gov.br\n\nContato Aline: (48) 3665-5403\nContato Humberto: (48) 3665-5297\n\nEstamos à disposição para apoiar a implementação dos seus projetos com IA!' }

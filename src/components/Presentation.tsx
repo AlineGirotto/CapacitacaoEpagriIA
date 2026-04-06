@@ -559,7 +559,7 @@ export default function Presentation() {
 
     return (
       <div
-        className={`w-full rounded-3xl border p-8 md:p-10 text-center ${
+        className={`w-full rounded-3xl border p-8 md:p-9 text-center ${isPresentation ? 'max-h-[80vh] overflow-y-auto' : ''} ${
           isDark
             ? 'bg-gradient-to-br from-white/10 via-white/5 to-white/10 border-white/20 shadow-2xl shadow-black/20'
             : 'bg-gradient-to-br from-white via-slate-50 to-white border-slate-200 shadow-xl shadow-slate-300/40'
@@ -568,25 +568,25 @@ export default function Presentation() {
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-epagri-green text-white shadow-lg">
           <CheckCircle2 size={24} />
         </div>
-        <h3 className={`font-display font-black ${isPresentation ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'} ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
+        <h3 className={`font-display font-black ${isPresentation ? 'text-2xl md:text-3xl' : 'text-2xl md:text-3xl'} ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
           Dúvidas e Suporte
         </h3>
         {team && (
-          <p className={`mt-3 ${isPresentation ? 'text-lg md:text-xl' : 'text-base md:text-lg'} italic ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+          <p className={`mt-3 ${isPresentation ? 'text-base md:text-lg' : 'text-base md:text-lg'} italic ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
             {team}
           </p>
         )}
 
         {emails.length > 0 && (
-          <div className="mt-8">
+          <div className="mt-6">
             <p className={`text-xs font-bold uppercase tracking-[0.18em] ${isDark ? 'text-epagri-olive' : 'text-epagri-green'}`}>
               E-mail
             </p>
-            <div className="mt-3 space-y-1">
+            <div className="mt-2 space-y-1">
               {emails.map((email) => (
                 <p
                   key={email}
-                  className={`${isPresentation ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-semibold break-all ${isDark ? 'text-white' : 'text-epagri-dark'}`}
+                  className={`${isPresentation ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'} font-semibold break-all ${isDark ? 'text-white' : 'text-epagri-dark'}`}
                 >
                   {email}
                 </p>
@@ -596,16 +596,16 @@ export default function Presentation() {
         )}
 
         {phoneContacts.length > 0 && (
-          <div className={`mt-8 grid grid-cols-1 gap-4 ${phoneContacts.length > 1 ? 'md:grid-cols-2' : ''}`}>
+          <div className={`mt-6 grid grid-cols-1 gap-3 ${phoneContacts.length > 1 ? 'md:grid-cols-2' : ''}`}>
             {phoneContacts.map((contact) => (
               <div
                 key={`${contact.label}-${contact.value}`}
-                className={`rounded-2xl border px-5 py-4 ${isDark ? 'bg-white/10 border-white/15' : 'bg-white border-slate-200'}`}
+                className={`rounded-2xl border px-4 py-3 ${isDark ? 'bg-white/10 border-white/15' : 'bg-white border-slate-200'}`}
               >
                 <p className={`text-xs font-bold uppercase tracking-[0.14em] ${isDark ? 'text-epagri-olive' : 'text-epagri-green'}`}>
                   {contact.label}
                 </p>
-                <p className={`mt-2 ${isPresentation ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-black ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
+                <p className={`mt-1 ${isPresentation ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'} font-black ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
                   {contact.value}
                 </p>
                 {contact.suffix && (
@@ -619,7 +619,7 @@ export default function Presentation() {
         )}
 
         {closingLine && (
-          <p className={`mt-8 ${isPresentation ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'} italic font-medium ${isDark ? 'text-slate-100' : 'text-slate-700'}`}>
+          <p className={`mt-6 ${isPresentation ? 'text-base md:text-lg' : 'text-lg md:text-xl'} italic font-medium ${isDark ? 'text-slate-100' : 'text-slate-700'}`}>
             {closingLine}
           </p>
         )}

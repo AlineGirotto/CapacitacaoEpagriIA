@@ -18,7 +18,7 @@
   theme?: 'light' | 'dark' | 'accent';
   qrCode?: string;
   animationType?: 'fade' | 'slide' | 'pulse' | 'bounce' | 'float';
-  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google' | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'notebook' | 'none';
+  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google'  | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'notebook' | 'gemini' | 'none';
   logos?: { name: string; image: string }[];
   timeline?: { year: string; title: string; description: string }[];
 }
@@ -33,9 +33,9 @@ export const slides: SlideData[] = [
 
 Prepare-se para uma jornada de **inovação** e **tecnologia**. Vamos explorar juntos como a Inteligência Artificial pode transformar o nosso dia a dia, otimizando processos e ampliando nossa capacidade criativa.
 
-Acesse esta apresentação interativa no seu dispositivo apontando a câmera para o QR Code ou pelo [link direto]( https://alinegirotto.github.io/CapacitacaoEpagriIA/)
+Acesse esta apresentação interativa no seu dispositivo apontando a câmera para o QR Code ou pelo [link direto](https://www.epagri.sc.gov.br/CapacitacaoEpagriIA/)
     `,
-    qrCode: ' https://alinegirotto.github.io/CapacitacaoEpagriIA/',
+    qrCode: 'https://www.epagri.sc.gov.br/CapacitacaoEpagriIA/',
     theme: 'dark',
     animationType: 'float',
     backgroundAnimation: 'tech'
@@ -397,6 +397,11 @@ Visando apoiar a continuidade do aprendizado e a implementação prática da IA 
         url: 'https://drive.google.com/file/d/1O7fp1QKvzc3NB1BT_msGx8LeLJSV5mU5/view?usp=sharing',
         icon: 'download',
       },
+      {
+        title: 'Gemini em conteúdos visuais',
+        url: 'https://workspace.google.com/blog/ai-and-machine-learning/beyond-the-hype-5-practical-ways-to-use-ai-powered-visual-content?utm_source=cloud_sfdc&utm_medium=email&utm_campaign=FY26-Q1-global-GlobalNurture-GWS39400-emailnurture-dl-sugarpine&utm_content=q1infoworkeremail2&utm_term=&mkt_tok=ODA4LUdKVy0zMTQAAAGhC_G39gT0qvQ6F3MsEe_Cl4vtDopTcCBbXYWeXGfmyktiSQiwCLS31OCxin_er8omB-iRGHnkpXBYrT2_hti0lbuGbiRqWnDXMYKzTvM6aOpvazBT-Y3Z',
+        icon: 'download',
+      }
     ],
     theme: 'light',
     animationType: 'pulse',

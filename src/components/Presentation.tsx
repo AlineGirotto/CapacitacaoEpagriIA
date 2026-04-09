@@ -262,7 +262,7 @@ export default function Presentation() {
 
   const renderLinksWithQRCodes = (links: { title: string; url: string; icon: string }[], isDark: boolean) => (
     <div className="mt-12 w-full flex justify-center px-4">
-      <div className="flex gap-6 w-full overflow-x-auto pb-4">
+      <div className="qr-links-scroll flex w-full gap-6 overflow-x-auto overflow-y-hidden pb-4">
         {links.map((link) => (
           <motion.div
             key={link.url}

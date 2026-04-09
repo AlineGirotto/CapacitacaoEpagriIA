@@ -404,6 +404,11 @@ Se preferir temos uma pasta compartilhada no Drive para acessar os materiais, [a
         icon: 'file-text',
       },
       {
+        title: 'RILC - NotebookLM',
+        url: 'https://notebooklm.google.com/notebook/caafa64e-0529-4c53-b5b4-2de8b02b18b8',
+        icon: 'download',
+      },
+      {
         title: 'Engenheiro de Prompts',
         url: 'https://gemini.google.com/gem/1Igx7Igc1yoWnvEAXBvO6mTY-Ck5fyzTl?usp=sharing',
         icon: 'sparkles',
@@ -417,7 +422,7 @@ Se preferir temos uma pasta compartilhada no Drive para acessar os materiais, [a
         title: 'Gemini em conteúdos visuais',
         url: 'https://workspace.google.com/blog/ai-and-machine-learning/beyond-the-hype-5-practical-ways-to-use-ai-powered-visual-content?utm_source=cloud_sfdc&utm_medium=email&utm_campaign=FY26-Q1-global-GlobalNurture-GWS39400-emailnurture-dl-sugarpine&utm_content=q1infoworkeremail2&utm_term=&mkt_tok=ODA4LUdKVy0zMTQAAAGhC_G39gT0qvQ6F3MsEe_Cl4vtDopTcCBbXYWeXGfmyktiSQiwCLS31OCxin_er8omB-iRGHnkpXBYrT2_hti0lbuGbiRqWnDXMYKzTvM6aOpvazBT-Y3Z',
         icon: 'download',
-      }
+      },
     ],
     theme: 'light',
     animationType: 'pulse',

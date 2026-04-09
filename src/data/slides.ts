@@ -25,6 +25,20 @@
 
 export const slides: SlideData[] = [
   {
+    id: 'presenca',
+    title: 'Registre sua presença!',
+    subtitle: 'Antes de Começar',
+    content: `
+**Escaneie o QR code na tela para registrar sua presença nessa capacitação.**
+
+Assim poderemos enviar o certificado de participação e materiais complementares diretamente para o seu e-mail.
+`,
+    qrCode: 'https://www.epagri.sc.gov.br/CapacitacaoEpagriIA/',
+    theme: 'light',
+    animationType: 'bounce',
+    backgroundAnimation: 'tech'
+  },
+  {
     id: 'welcome',
     title: 'IA na Prática: Ecossistema Google e Produtividade',
     subtitle: 'Boas-vindas, Epagrianos! 🚀',
@@ -369,12 +383,14 @@ Vamos explorar como usar as duas ferramentas em conjunto para potencializar a an
   },
   {
     id: 'materiais',
-    title: 'Extra',
+    title: 'Extras',
     subtitle: 'Materiais e Ferramentas Adicionais',
     content: `
 **Recursos adicionais para explorar:**
 
 Visando apoiar a continuidade do aprendizado e a implementação prática da IA na EPAGRI, aqui estão alguns recursos extras que podem ser úteis para aprofundar seus conhecimentos e experimentar novas ferramentas:
+
+Se preferir temos uma pasta compartilhada no Drive para acessar os materiais, [acesse aqui.](https://drive.google.com/drive/folders/1cAw6l1y7GmtR6W3Q26jqCIqJXgdOex_X?usp=sharing)
     `,
     links: [
       {
@@ -581,14 +597,14 @@ Chegou a hora de compartilhar as soluções desenvolvidas com a turma! Cada grup
     subtitle: 'Encerramento',
     content: `
 
-O futuro é promissor e cheio de possibilidades. Continuem explorando, experimentando e inovando com as ferramentas que conhecemos hoje. O conhecimento é o primeiro passo para a transformação na EPAGRI!
+O futuro é promissor e cheio de possibilidades. Continuem explorando, experimentando e inovando com as ferramentas que conhecemos. O conhecimento é o primeiro passo para a transformação na EPAGRI!
 
-O DEGTI está à disposição para apoiar a implementação dos projetos e para continuar essa jornada. 
+Estamos à disposição para apoiar a implementação dos projetos e para continuar essa jornada. 
 
 **Muito obrigado a todos!**
 `,
     examples: [
-      { area: 'Dúvidas e Suporte', text: 'Equipe DEGTI e DEPLAN\n\ndesenvolvimento@epagri.sc.gov.br\nplanejamento@epagri.sc.gov.br\nalinegirotto@epagri.sc.gov.br\n	humbertoneto@epagri.sc.gov.br\n\nContato Aline: (48) 3665-5403\nContato Humberto: (48) 3665-5297\n\nEstamos à disposição para apoiar a implementação dos seus projetos com IA!' }
+      { area: 'Dúvidas e Suporte', text: 'Equipe DEGTI e DEPLAN\n\ndesenvolvimento@epagri.sc.gov.br\nplanejamento@epagri.sc.gov.br\nalinegirotto@epagri.sc.gov.br\n	humbertoneto@epagri.sc.gov.br\n\nContato Aline: (48) 3665-5403\nContato Humberto: (48) 3665-5297\n' }
     ],
     theme: 'dark',
     animationType: 'pulse',

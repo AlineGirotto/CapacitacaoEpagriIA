@@ -11,6 +11,7 @@ import logoGmail from '../img/logoGmail.png';
 import logoDocs from '../img/logoDocs.png';
 import logoPlanilha from '../img/logoPlanilha.png';
 import logoAprese from '../img/logoAprese.png';
+import imagemPresenca from '../img/presenca.png';
 
 const timelineIcons = [Brain, MessageSquare, Cpu, Globe, Zap, Network, Database, Bot, Sparkles];
 
@@ -305,17 +306,27 @@ export default function Presentation() {
           isDark ? 'bg-white/5 border-white/10' : 
           'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
         }`}>
-          <h3 className={`text-xl font-bold mb-6 ${
-            isDark ? 'text-white' : 'text-epagri-dark'
-          }`}>
-              Acesse o material
-          </h3>
+          {slide.id !== 'presenca' && (
+            <h3 className={`text-xl font-bold mb-6 ${
+              isDark ? 'text-white' : 'text-epagri-dark'
+            }`}>
+                Acesse o material
+            </h3>
+          )}
           <div className="bg-white p-4 rounded-xl shadow-inner mb-4">
-            <QRCode value={slide.qrCode} size={200} level="H" />
+            {slide.id === 'presenca' ? (
+              <img src={imagemPresenca} alt="QR Code Presença" className="w-[300px] h-[300px] object-contain" />
+            ) : (
+              <QRCode value={slide.qrCode} size={200} level="H" />
+            )}
           </div>
-          <p className={`text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-            Escaneie com a câmera do seu celular
-          </p>
+          {slide.id !== 'presenca' && (
+            <p className={`text-sm ${
+              isDark ? 'text-slate-300' : 'text-slate-600'
+            }`}>
+              Escaneie com a câmera do seu celular
+            </p>
+          )}
         </div>
       )}
 
@@ -1152,6 +1163,19 @@ export default function Presentation() {
                 )}
                 </motion.div>
               </AnimatePresence>
+            </div>
+
+            <div className="fixed top-6 right-6 z-[70] flex items-center gap-3 rounded-2xl border border-white/15 bg-black/45 px-4 py-3 text-white backdrop-blur-md shadow-lg">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">&larr;</span>
+                <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">&rarr;</span>
+                <span className="hidden sm:inline text-white/85">navegar</span>
+              </div>
+              <div className="h-6 w-px bg-white/20"></div>
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">Esc</span>
+                <span className="hidden sm:inline text-white/85">sair</span>
+              </div>
             </div>
 
             {/* Controls */}

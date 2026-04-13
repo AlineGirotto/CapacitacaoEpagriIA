@@ -17,7 +17,7 @@
   theme?: 'light' | 'dark' | 'accent';
   qrCode?: string;
   animationType?: 'fade' | 'slide' | 'pulse' | 'bounce' | 'float';
-  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google'  | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'notebook' | 'gemini' | 'pluss' | 'none';
+  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google'  | 'celebration' | 'leis' | 'question' | 'marketplace' | 'prompt' | 'notebook' | 'gemini' | 'pluss' | 'none';
   logos?: { name: string; image: string }[];
   timeline?: { year: string; title: string; description: string }[];
 }
@@ -142,8 +142,35 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
     `,
     spotlightQuote: 'IA sugere, o humano decide.',
     theme: 'light',
-    animationType: 'pulse',
-    backgroundAnimation: 'none'
+    animationType: 'slide',
+    backgroundAnimation: 'leis'
+  },
+  {
+    id: 'epagri-regras-direitos',
+    title: 'IA na Epagri: Regras e Direitos',
+    content: `
+* **Princípios Obrigatórios:** Coletar o mínimo de dados possível (Necessidade), usar apenas para fins legítimos (Finalidade), com segurança e rastreabilidade (logs).
+* **Diretrizes da POSIN:** Priorizar a não utilização de dados pessoais em IAs; a implementação de qualquer nova tecnologia exige avaliação prévia da TI e do DPO.
+* **Direito à Explicação:** Pela Lei Estadual nº 19.450/2025, o cidadão tem o direito de entender e contestar qualquer decisão automatizada tomada por uma IA.
+* **Propriedade Intelectual:** Todo código ou modelo de IA desenvolvido para a empresa é propriedade exclusiva da Epagri.
+    `,
+    theme: 'light',
+    animationType: 'slide',
+    backgroundAnimation: 'leis'
+  },
+  {
+    id: 'epagri-riscos-criticos',
+    title: 'Riscos Críticos e Como Agir',
+    content: `
+* **Perda de Patente:** Inserir dados de pesquisas inéditas em IAs abertas (ex: ChatGPT) torna a informação pública e impede o registro legal da patente.
+* **Vazamento de Dados:** É vedado inserir relatórios com dados pessoais (CPFs, nomes) em ferramentas externas não auditadas.
+* **Vieses e Discriminação:** Atenção a modelos que geram recomendações técnicas erradas por ignorar características regionais ou perfis de pequenos produtores.
+* **Segurança na Prática:** Use apenas ferramentas aprovadas, garanta a rastreabilidade (logs) e respeite o princípio do menor privilégio de acesso.
+* **Privacy by Design:** A proteção de dados e a segurança devem ser integradas desde a fase de concepção de qualquer projeto ou serviço.
+    `,
+    theme: 'light',
+    animationType: 'slide',
+    backgroundAnimation: 'leis'
   },
   {
     id: 'prompts-intro',

@@ -82,6 +82,7 @@ const BackgroundAnimation = ({
   if (type === 'prompt') icons = ['💬', '📝', '✍️', '⚙️', '📰'];
   if (type === 'marketplace') icons = ['🛒', '🏢', '💰', '📦', '🛍️'];
   if (type === 'pluss') icons = ['➕', '✨', '💡', '❓', '❗'];
+  if (type === 'leis') icons = ['⚖️', '📜', '👩‍⚖️', '🏛️', '🔍'];
 
   if (!useToolLogos && icons.length === 0) return null;
 

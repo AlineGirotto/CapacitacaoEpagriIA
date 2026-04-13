@@ -323,29 +323,29 @@ export default function Presentation() {
     </div>
   );
 
-  const renderSidebar = (slide: typeof slides[0], isDark: boolean) => (
-    <div className="space-y-6 sticky top-28">
+  const renderSidebar = (slide: typeof slides[0], isDark: boolean, isPresentation = false) => (
+    <div className={isPresentation ? 'space-y-4' : 'space-y-6 sticky top-28'}>
       {slide.qrCode && (
-        <div className={`p-8 rounded-3xl border flex flex-col items-center justify-center text-center ${
+        <div className={`${isPresentation ? 'p-5 md:p-6' : 'p-8'} rounded-3xl border flex flex-col items-center justify-center text-center ${
           isDark ? 'bg-white/5 border-white/10' : 
           'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
         }`}>
           {slide.id !== 'presenca' && (
-            <h3 className={`text-xl font-bold mb-6 ${
+            <h3 className={`${isPresentation ? 'text-base md:text-lg mb-4' : 'text-xl mb-6'} font-bold ${
               isDark ? 'text-white' : 'text-epagri-dark'
             }`}>
                 Acesse o material
             </h3>
           )}
-          <div className="bg-white p-4 rounded-xl shadow-inner mb-4">
+          <div className={`bg-white rounded-xl shadow-inner ${isPresentation ? 'p-3 mb-3' : 'p-4 mb-4'}`}>
             {slide.id === 'presenca' ? (
-              <img src={imagemPresenca} alt="QR Code Presença" className="w-[300px] h-[300px] object-contain" />
+              <img src={imagemPresenca} alt="QR Code Presença" className={`${isPresentation ? 'w-[220px] h-[220px]' : 'w-[300px] h-[300px]'} object-contain`} />
             ) : (
-              <QRCode value={slide.qrCode} size={200} level="H" />
+              <QRCode value={slide.qrCode} size={isPresentation ? 150 : 200} level="H" />
             )}
           </div>
           {slide.id !== 'presenca' && (
-            <p className={`text-sm ${
+            <p className={`${isPresentation ? 'text-xs' : 'text-sm'} ${
               isDark ? 'text-slate-300' : 'text-slate-600'
             }`}>
               Escaneie com a câmera do seu celular
@@ -363,17 +363,17 @@ export default function Presentation() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex items-center justify-between p-6 rounded-2xl transition-all ${
+                className={`group flex items-center justify-between ${isPresentation ? 'p-4 md:p-5' : 'p-6'} rounded-2xl transition-all ${
                   isDark 
                     ? 'bg-white/10 hover:bg-white/20 border border-white/10' 
                     : 'bg-white border-2 border-epagri-light/20 hover:border-epagri-green shadow-sm hover:shadow-md'
                 }`}
               >
-                <span className={`font-bold text-lg ${
+                <span className={`font-bold ${isPresentation ? 'text-base md:text-lg' : 'text-lg'} ${
                   isDark ? 'text-white' : 'text-epagri-dark group-hover:text-epagri-green'
                 }`}>{link.title}</span>
                 <div className={isDark ? 'text-epagri-olive' : 'text-epagri-red'}>
-                  {getLinkIconComponent(link.icon, 24)}
+                  {getLinkIconComponent(link.icon, isPresentation ? 20 : 24)}
                 </div>
               </a>
             );
@@ -780,13 +780,6 @@ export default function Presentation() {
               >
                 {/* Section Header */}
                 <div className="mb-6 md:mb-8 border-b border-slate-200/20 pb-4 md:pb-6">
-                  <div className={`inline-flex items-center gap-3 px-5 py-2 text-sm font-bold uppercase tracking-widest rounded-full mb-4 md:mb-6 shadow-sm ${
-                    isDark ? 'bg-epagri-olive text-epagri-dark' : 
-                    'bg-epagri-dark text-white'
-                  }`}>
-                    <span className="w-2 h-2 rounded-full bg-current opacity-50"></span>
-                    {slide.subtitle}
-                  </div>
                   <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                     <h2 className={`text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight ${
                       isDark ? 'text-white' : 'text-epagri-dark'
@@ -975,7 +968,7 @@ export default function Presentation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className={`fixed inset-0 z-[60] flex flex-col justify-center overflow-hidden ${
+            className={`fixed inset-0 z-[60] flex flex-col justify-start overflow-y-auto overflow-x-hidden ${
               slides[slideIndex].theme === 'dark' ? 'bg-epagri-dark text-white' : 
               slides[slideIndex].theme === 'accent' ? 'bg-slate-100 text-slate-900' : 
               'bg-white text-slate-900'
@@ -991,7 +984,7 @@ export default function Presentation() {
               <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-epagri-green rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
             )}
 
-            <div className="max-w-7xl mx-auto w-full px-8 md:px-16 py-12 relative z-10 flex-1 flex flex-col justify-center">
+            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-10 lg:px-14 pt-4 md:pt-8 pb-24 md:pb-28 relative z-10 flex-1 flex flex-col justify-start lg:justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={slideIndex}
@@ -1008,19 +1001,12 @@ export default function Presentation() {
                     x: direction > 0 ? -50 : direction < 0 ? 50 : 0 
                   }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="w-full"
+                  className="w-full pb-6"
                 >
                   {/* Section Header */}
-                <div className="mb-6 md:mb-8 border-b border-slate-200/20 pb-4 md:pb-6">
-                  <div className={`inline-flex items-center gap-3 px-5 py-2 text-sm md:text-base font-bold uppercase tracking-widest rounded-full mb-4 md:mb-6 shadow-sm ${
-                    slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive text-epagri-dark' : 
-                    'bg-epagri-dark text-white'
-                  }`}>
-                    <span className="w-2 h-2 rounded-full bg-current opacity-50"></span>
-                    {slides[slideIndex].subtitle}
-                  </div>
+                <div className="mb-4 md:mb-6 border-b border-slate-200/20 pb-3 md:pb-5">
                   <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                    <h2 className={`text-5xl md:text-6xl lg:text-7xl font-display font-black tracking-tight leading-tight ${
+                    <h2 className={`text-[clamp(1.9rem,4.2vw,3.8rem)] font-display font-black tracking-tight leading-tight ${
                       slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'
                     }`}>
                       {slides[slideIndex].id === 'welcome' ? (
@@ -1048,9 +1034,9 @@ export default function Presentation() {
                 </div>
 
                 {/* Section Body */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-                  <div className={(slides[slideIndex].links || slides[slideIndex].qrCode) && slides[slideIndex].id !== 'materiais' ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
-                    <div className={`prose prose-lg md:prose-xl max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
+                <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-12 items-start">
+                  <div className={(slides[slideIndex].links || slides[slideIndex].qrCode) && slides[slideIndex].id !== 'materiais' ? 'xl:col-span-7 2xl:col-span-8' : 'xl:col-span-12'}>
+                    <div className={`prose prose-sm sm:prose-base xl:prose-lg max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
                       slides[slideIndex].theme === 'dark' ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200' : 
                       'prose-slate prose-headings:text-epagri-dark prose-a:text-epagri-green hover:prose-a:text-epagri-dark prose-strong:text-slate-900'
                     }`}>
@@ -1179,8 +1165,8 @@ export default function Presentation() {
 
                   {/* Sidebar - não exibe no slide de materiais */}
                   {(slides[slideIndex].links || slides[slideIndex].qrCode) && slides[slideIndex].id !== 'materiais' && (
-                    <div className="lg:col-span-5 xl:col-span-4">
-                      {renderSidebar(slides[slideIndex], slides[slideIndex].theme === 'dark')}
+                    <div className="xl:col-span-5 2xl:col-span-4">
+                      {renderSidebar(slides[slideIndex], slides[slideIndex].theme === 'dark', true)}
                     </div>
                   )}
                 </div>
@@ -1198,7 +1184,7 @@ export default function Presentation() {
               </AnimatePresence>
             </div>
 
-            <div className="fixed top-6 right-6 z-[70] flex items-center gap-3 rounded-2xl border border-white/15 bg-black/45 px-4 py-3 text-white backdrop-blur-md shadow-lg">
+            <div className="fixed top-4 right-4 z-[70] hidden xl:flex items-center gap-3 rounded-2xl border border-white/15 bg-black/45 px-3 py-2 text-white backdrop-blur-md shadow-lg">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">&larr;</span>
                 <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">&rarr;</span>
@@ -1212,7 +1198,7 @@ export default function Presentation() {
             </div>
 
             {/* Controls */}
-            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 z-[70] bg-black/40 backdrop-blur-md text-white px-6 py-3 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300">
+            <div className="fixed bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-[70] bg-black/40 backdrop-blur-md text-white px-3 py-1.5 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300">
               <span className="text-sm font-bold mr-2">{slideIndex + 1} / {slides.length}</span>
               <button onClick={prevSlide} disabled={slideIndex === 0} className="p-2 rounded-full hover:bg-white/20 disabled:opacity-30 transition-colors"><ChevronLeft size={24} /></button>
               <button onClick={nextSlide} disabled={slideIndex === slides.length - 1} className="p-2 rounded-full hover:bg-white/20 disabled:opacity-30 transition-colors"><ChevronRight size={24} /></button>

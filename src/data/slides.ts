@@ -1,7 +1,6 @@
 ﻿export interface SlideData {
   id: string;
   title: string;
-  subtitle: string;
   content: string;
   spotlightQuote?: string;
   productBadge?: 'gemini' | 'notebooklm';
@@ -27,7 +26,6 @@ export const slides: SlideData[] = [
   {
     id: 'presenca',
     title: 'Registre sua presença!',
-    subtitle: 'Antes de Começar',
     content: `
 **Escaneie o QR Code na tela para registrar sua presença nesta capacitação.**
 
@@ -41,7 +39,6 @@ Assim, poderemos enviar o certificado de participação e materiais complementar
   {
     id: 'welcome',
     title: 'IA na Prática: Ecossistema Google e Produtividade',
-    subtitle: 'Boas-vindas, Epagrianos! 🚀',
     content: `
 ### Estamos muito felizes em ter você aqui! 🌟
 
@@ -57,7 +54,6 @@ Acesse esta apresentação interativa no seu dispositivo apontando a câmera par
   {
     id: 'questionamento',
     title: 'O que é Inteligência Artificial?',
-    subtitle: 'Questionamento',
     content: `
 Antes de mergulharmos no universo da IA, resuma em **até 4 palavras** o que você entende por "Inteligência Artificial".
 
@@ -73,7 +69,6 @@ Para isso, acesse o QR Code pelo celular e envie sua resposta. Vamos criar uma n
   {
     id: 'intro-1',
     title: 'Inteligência Artificial',
-    subtitle: 'Módulo 1: Introdução e Contexto',
     content: `
 A Inteligência Artificial Generativa não veio para substituir, mas para **amplificar a nossa capacidade técnica**. Nosso foco será em ferramentas corporativas que garantem a segurança e a governança dos dados da EPAGRI.
 
@@ -93,7 +88,6 @@ A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, preve
   {
     id: 'intro-2',
     title: 'A Evolução Histórica da IA',
-    subtitle: 'Módulo 1: Introdução e Contexto',
     content: `A jornada até a IA Generativa foi longa e cheia de marcos importantes:`,
     timeline: [
       { year: '1950', title: 'Teste de Turing', description: 'Alan Turing propõe um teste para determinar se uma máquina pode exibir comportamento inteligente.' },
@@ -113,7 +107,6 @@ A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, preve
   {
     id: 'motor',
     title: 'Automação vs. Inteligência Artificial',
-    subtitle: 'Módulo 2: O Motor da IA',
     content: `
 A distinção fundamental entre automação e IA reside na transição de sistemas que apenas seguem ordens para sistemas que aprendem a decidir. 
 Enquanto a automação opera como um 'músculo' programado para tarefas repetitivas sob regras rígidas, a IA atua como um 'cérebro' capaz de analisar contextos, 
@@ -137,7 +130,6 @@ aprender com o histórico e lidar com ambiguidades.
   {
     id: 'etica',
     title: 'Cuidados, Ética e Governança',
-    subtitle: 'Módulo 3: Uso Responsável',
     content: `
 O uso da IA exige responsabilidade, senso crítico e ética, especialmente no setor público.
 
@@ -156,7 +148,6 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
   {
     id: 'prompts-intro',
     title: 'A Arte do Prompt: Conceitos e Técnicas',
-    subtitle: 'Módulo 4: Comunicação com a Máquina',
     content: `
 **O Prompt é a ponte entre a sua mente e a máquina.**
 
@@ -176,7 +167,6 @@ Mude a mentalidade de "escrever" para "especificar". Em essência, é a instruç
   {
     id: 'prompts-formulas-1',
     title: 'Fórmulas de Estruturação: FOCO e PTF',
-    subtitle: 'Módulo 4: Comunicação com a Máquina',
     content: `
 Veja abaixo duas fórmulas simples para montar prompts mais claros e úteis no dia a dia.
     `,
@@ -213,7 +203,6 @@ Veja abaixo duas fórmulas simples para montar prompts mais claros e úteis no d
   {
     id: 'prompts-formulas-2',
     title: 'Fórmulas de Estruturação: CARE, PEPE e TAO',
-    subtitle: 'Módulo 4: Comunicação com a Máquina',
     content: `
 Estas três fórmulas ajudam quando você precisa padronizar respostas, organizar etapas ou pedir algo de forma direta.
     `,
@@ -262,7 +251,6 @@ Estas três fórmulas ajudam quando você precisa padronizar respostas, organiza
   {
     id: 'minilab-1',
     title: 'Mini-Lab 1: Prompts',
-    subtitle: 'Prática',
     content: `
 **Mão na massa!**
 
@@ -290,7 +278,6 @@ Vamos criar prompts estruturados para as diferentes áreas da EPAGRI utilizando 
   {
     id: 'notebooklm',
     title: 'NotebookLM: Análise de Bases',
-    subtitle: 'Módulo 5',
     content: `
 O **NotebookLM** é uma IA que responde **apenas** com base nos documentos. Ele não busca conhecimento na internet, mas sim no conteúdo específico que você fornece, garantindo respostas precisas e contextualizadas.
 
@@ -320,7 +307,6 @@ Veja alguns cenários em que o NotebookLM pode apoiar diferentes áreas com mais
   {
     id: 'minilab-3',
     title: 'Mini-Lab 3: Notebook',
-    subtitle: 'Prática',
     content: `
 **Exercício prático com documentos reais.**
 
@@ -342,7 +328,6 @@ Vamos baixar os arquivos de referência, subir no NotebookLM e usar esse materia
   {
     id: 'gemini-gems',
     title: 'Gemini e Gem',
-    subtitle: 'Módulo 6',
     content: `
 O **Gemini** é a nova geração de LLMs do Google, com capacidade multimodal nativa (texto, imagem, áudio e vídeo). Possui uma "janela de contexto" de até 2 milhões de tokens, permitindo processar grandes volumes de informação em uma única interação.
 
@@ -362,7 +347,6 @@ O Gem do Google é um agente personalizado que pode ser treinado com dados espec
   {
     id: 'minilab-4',
     title: 'Mini-Lab 4: Gemini & Gem',
-    subtitle: 'Prática',
     content: `
 **Exercício prático, mão na massa!**
 
@@ -384,7 +368,6 @@ Vamos explorar como usar as duas ferramentas em conjunto para potencializar a an
   {
     id: 'materiais',
     title: 'Extras',
-    subtitle: 'Materiais e Ferramentas Adicionais',
     content: `
 **Recursos adicionais para explorar:**
 
@@ -436,7 +419,6 @@ Se preferir, temos uma pasta compartilhada no Drive para acessar os materiais: [
   {
     id: 'workspace-text',
     title: 'Workspace I: Redação e Análise',
-    subtitle: 'Módulo 7',
     content: `
 A IA já está embutida no Google Workspace, trazendo funcionalidades avançadas para redação, análise de dados e criação de conteúdo visual.
 
@@ -463,7 +445,6 @@ A IA já está embutida no Google Workspace, trazendo funcionalidades avançadas
   {
     id: 'workspace-data',
     title: 'Workspace II: Dados e Visual',
-    subtitle: 'Módulo 8',
     content: `
 A IA também potencializa a análise de dados e a criação de conteúdo visual, transformando a forma como interagimos com planilhas e apresentações.
 
@@ -488,7 +469,6 @@ A IA também potencializa a análise de dados e a criação de conteúdo visual,
   {
     id: 'panorama-1',
     title: 'Geradores de Imagens',
-    subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
 Ferramentas para criação de materiais de divulgação, ilustrações técnicas e prototipagem visual, semelhantes ao **Nano Banana** do Google.
 
@@ -503,7 +483,6 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
   {
     id: 'panorama-2',
     title: 'Texto, Raciocínio e Vídeos',
-    subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
 **IA Generativa de Texto e Raciocínio (LLMs), semelhante ao Gemini:**
 * **ChatGPT (OpenAI):** Pioneiro e versátil. Excelente para raciocínio lógico e suporte à programação.
@@ -522,7 +501,6 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
   {
     id: 'panorama-3',
     title: 'Prototipagem, Automação e Apresentações',
-    subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
 **Criação de Apresentações:**
 * **Beautiful.ai:** IA focada em design que ajusta o layout automaticamente.
@@ -546,7 +524,6 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
   {
     id: 'panorama-4',
     title: 'Ferramentas Setoriais',
-    subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
 **Para Pesquisa e Ensino:**
 * **Perplexity AI:** Motor de busca que cita fontes acadêmicas em tempo real.
@@ -569,7 +546,6 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
   {
     id: 'oficina',
     title: 'Oficina de Projetos',
-    subtitle: 'Laboratório Final',
     content: `
 **Desenvolvimento da solução.**
 
@@ -589,7 +565,6 @@ Desenvolvam uma solução utilizando o **Gemini, Gem** e/ou o **NotebookLM** e p
   {
     id: 'showcase',
     title: 'Showcase',
-    subtitle: 'Apresentação dos Projetos',
     content: `
 **Apresentação dos Projetos**
 
@@ -604,7 +579,6 @@ Chegou a hora de compartilhar as soluções desenvolvidas com a turma! Cada grup
   {
     id: 'celebration',
     title: 'Parabéns a Todos! 🎉🥳',
-    subtitle: 'Encerramento',
     content: `
 
 O futuro é promissor e cheio de possibilidades. Continuem explorando, experimentando e inovando com as ferramentas que conhecemos. O conhecimento é o primeiro passo para a transformação na EPAGRI!
@@ -623,7 +597,6 @@ Estamos à disposição para apoiar a implementação dos projetos e para contin
   {
     id: 'avaliacao',
     title: 'Sua Opinião É Importante!',
-    subtitle: 'Avaliação da Capacitação',
     content: `
 **Queremos saber sua experiência!**
 
@@ -641,7 +614,6 @@ Acesse o QR Code no seu celular e responda ao nosso formulário de avaliação. 
   {
     id: 'complementares',
     title: 'Materiais Complementares',
-    subtitle: 'Recursos para Aprofundamento',
     content: `
 **Explore mais sobre IA com estes recursos adicionais:**
 
@@ -671,7 +643,6 @@ Confira os materiais complementares para reforçar os conceitos e o uso das ferr
   {
     id: 'coffee',
     title: 'Coffee Break',
-    subtitle: 'Intervalo de Integração',
     content: `
 Pausa para um café e networking. Voltamos em breve!
     `,
@@ -682,7 +653,6 @@ Pausa para um café e networking. Voltamos em breve!
   {
     id: 'almoco',
     title: 'Almoço',
-    subtitle: 'Intervalo',
     content: `
 **Bom apetite!** Retornamos após o almoço.
     `,

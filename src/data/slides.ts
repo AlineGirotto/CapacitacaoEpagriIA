@@ -18,7 +18,7 @@
   theme?: 'light' | 'dark' | 'accent';
   qrCode?: string;
   animationType?: 'fade' | 'slide' | 'pulse' | 'bounce' | 'float';
-  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google'  | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'notebook' | 'gemini' | 'none';
+  backgroundAnimation?: 'coffee' | 'lunch' | 'minilab' | 'challenge' | 'handson' | 'tech' | 'google'  | 'celebration' | 'question' | 'marketplace' | 'prompt' | 'notebook' | 'gemini' | 'pluss' | 'none';
   logos?: { name: string; image: string }[];
   timeline?: { year: string; title: string; description: string }[];
 }
@@ -29,9 +29,9 @@ export const slides: SlideData[] = [
     title: 'Registre sua presença!',
     subtitle: 'Antes de Começar',
     content: `
-**Escaneie o QR code na tela para registrar sua presença nessa capacitação.**
+**Escaneie o QR Code na tela para registrar sua presença nesta capacitação.**
 
-Assim poderemos enviar o certificado de participação e materiais complementares diretamente para o seu e-mail.
+Assim, poderemos enviar o certificado de participação e materiais complementares diretamente para o seu e-mail.
 `,
     qrCode: 'https://www.epagri.sc.gov.br/CapacitacaoEpagriIA/',
     theme: 'light',
@@ -61,7 +61,7 @@ Acesse esta apresentação interativa no seu dispositivo apontando a câmera par
     content: `
 Antes de mergulharmos no universo da IA, resuma em **até 4 palavras** o que você entende por "Inteligência Artificial".
 
-Para isso acesse o QR Code pelo celular e envie sua resposta. Vamos criar uma nuvem de palavras com as respostas da turma para visualizar a percepção geral sobre o tema!
+Para isso, acesse o QR Code pelo celular e envie sua resposta. Vamos criar uma nuvem de palavras com as respostas da turma para visualizar a percepção geral sobre o tema!
 
   [Acesse a atividade](https://app.sli.do/event/ahGxm75pdJVdqjGwmBtWW6)
     `,
@@ -79,12 +79,12 @@ A Inteligência Artificial Generativa não veio para substituir, mas para **ampl
 
 ### O que é a Inteligência Artificial (IA)?
 A Inteligência Artificial é um campo da Ciência da Computação que busca criar sistemas capazes de realizar tarefas que, até então, exigiam a cognição humana. 
-Diferente do software tradicional, a IA utiliza modelos matemáticos e estatísticos para aprender com grandes volumes de dados. 
+Diferentemente do software tradicional, a IA utiliza modelos matemáticos e estatísticos para aprender com grandes volumes de dados. 
 Ela não é programada com a resposta final, mas sim treinada para prever o resultado mais provável com base em padrões históricos.
 
 ### Como funciona hoje?
 Hoje, vivemos a revolução das LLMs (Large Language Models). 
-Elas funcionam através de uma arquitetura que permite à IA processar bilhões de palavras e entender o relacionamento e o peso de cada uma em uma frase. 
+Elas funcionam por meio de uma arquitetura que permite à IA processar bilhões de palavras e entender o relacionamento e o peso de cada uma em uma frase. 
 A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, prevendo a próxima palavra (token) com base no contexto e na intenção do usuário (prompt).`,
     theme: 'light',
     animationType: 'slide',
@@ -264,7 +264,7 @@ Estas três fórmulas ajudam quando você precisa padronizar respostas, organiza
     title: 'Mini-Lab 1: Prompts',
     subtitle: 'Prática',
     content: `
-**Mão na Massa!**
+**Mão na massa!**
 
 Vamos criar prompts estruturados para as diferentes áreas da EPAGRI utilizando as fórmulas FOCO e PTF.
 
@@ -390,7 +390,7 @@ Vamos explorar como usar as duas ferramentas em conjunto para potencializar a an
 
 Visando apoiar a continuidade do aprendizado e a implementação prática da IA na EPAGRI, aqui estão alguns recursos extras que podem ser úteis para aprofundar seus conhecimentos e experimentar novas ferramentas:
 
-Se preferir temos uma pasta compartilhada no Drive para acessar os materiais, [acesse aqui.](https://drive.google.com/drive/folders/1cAw6l1y7GmtR6W3Q26jqCIqJXgdOex_X?usp=sharing)
+Se preferir, temos uma pasta compartilhada no Drive para acessar os materiais: [acesse aqui.](https://drive.google.com/drive/folders/1cAw6l1y7GmtR6W3Q26jqCIqJXgdOex_X?usp=sharing)
     `,
     links: [
       {
@@ -401,16 +401,21 @@ Se preferir temos uma pasta compartilhada no Drive para acessar os materiais, [a
       {
         title: 'Guia de TR e ETP',
         url: 'https://gemini.google.com/gem/185MSs-9-RLJi-aDDd5mAI-z12C1gqGiF?usp=sharing',
-        icon: 'file-text',
+        icon: 'sparkles',
       },
       {
         title: 'RILC - NotebookLM',
         url: 'https://notebooklm.google.com/notebook/caafa64e-0529-4c53-b5b4-2de8b02b18b8',
-        icon: 'download',
+        icon: 'sparkles',
       },
       {
         title: 'Engenheiro de Prompts',
         url: 'https://gemini.google.com/gem/1Igx7Igc1yoWnvEAXBvO6mTY-Ck5fyzTl?usp=sharing',
+        icon: 'sparkles',
+      },
+      {
+        title: 'DMAGT - NotebookLM',
+        url: 'https://notebooklm.google.com/notebook/5d07b948-8dca-4896-86bc-d4411fd1e368',
         icon: 'sparkles',
       },
       {
@@ -421,12 +426,12 @@ Se preferir temos uma pasta compartilhada no Drive para acessar os materiais, [a
       {
         title: 'Gemini em conteúdos visuais',
         url: 'https://workspace.google.com/blog/ai-and-machine-learning/beyond-the-hype-5-practical-ways-to-use-ai-powered-visual-content?utm_source=cloud_sfdc&utm_medium=email&utm_campaign=FY26-Q1-global-GlobalNurture-GWS39400-emailnurture-dl-sugarpine&utm_content=q1infoworkeremail2&utm_term=&mkt_tok=ODA4LUdKVy0zMTQAAAGhC_G39gT0qvQ6F3MsEe_Cl4vtDopTcCBbXYWeXGfmyktiSQiwCLS31OCxin_er8omB-iRGHnkpXBYrT2_hti0lbuGbiRqWnDXMYKzTvM6aOpvazBT-Y3Z',
-        icon: 'download',
+        icon: 'sparkles',
       },
     ],
     theme: 'light',
     animationType: 'pulse',
-    backgroundAnimation: 'question'
+    backgroundAnimation: 'pluss'
   },
   {
     id: 'workspace-text',
@@ -488,7 +493,7 @@ A IA também potencializa a análise de dados e a criação de conteúdo visual,
 Ferramentas para criação de materiais de divulgação, ilustrações técnicas e prototipagem visual, semelhantes ao **Nano Banana** do Google.
 
 * **Midjourney:** Referência em qualidade estética e realismo. Operado via Discord, ideal para campanhas de alto impacto visual (Comunicação e Marketing).
-* **DALL-E 3 (OpenAI):** Integrado ao ecossistema Microsoft e ChatGPT. Preciso em seguir instruções complexas e renderizar textos legíveis nas imagens.
+* **DALL-E 3 (OpenAI):** Integrado ao ecossistema Microsoft e ChatGPT. Preciso ao seguir instruções complexas e renderizar textos legíveis nas imagens.
 * **Adobe Firefly:** A escolha para compliance e segurança jurídica. Treinado em bancos de imagens licenciadas (Adobe Stock), garantindo que não infrinjam direitos autorais.
     `,
     theme: 'light',
@@ -622,7 +627,7 @@ Estamos à disposição para apoiar a implementação dos projetos e para contin
     content: `
 **Queremos saber sua experiência!**
 
-Acesse o QR Code no seu celular e responda nosso formulário de avaliação. Seus comentários, sugestões e feedback são essenciais para melhorar futuras capacitações e tornar a jornada de IA na EPAGRI cada vez melhor.
+Acesse o QR Code no seu celular e responda ao nosso formulário de avaliação. Seus comentários, sugestões e feedback são essenciais para melhorar futuras capacitações e tornar a jornada de IA na EPAGRI cada vez melhor.
 
 [Acesse o formulário.](https://docs.google.com/forms/d/e/1FAIpQLSflk94mWsf6QDRqPNZX23ZmkCcIl-1ni9pzdOMRl5TMkovl-g/viewform?usp=preview)
 
@@ -632,6 +637,36 @@ Acesse o QR Code no seu celular e responda nosso formulário de avaliação. Seu
     theme: 'dark',
     animationType: 'float',
     backgroundAnimation: 'celebration'
+  },
+  {
+    id: 'complementares',
+    title: 'Materiais Complementares',
+    subtitle: 'Recursos para Aprofundamento',
+    content: `
+**Explore mais sobre IA com estes recursos adicionais:**
+
+Confira os materiais complementares para reforçar os conceitos e o uso das ferramentas apresentadas. Ressaltamos que, dependendo da ferramenta, algumas funcionalidades podem estar limitadas em função do controle de acesso e das condições contratuais com o Google.
+`,
+    links: [
+        {
+        title: 'Curso IA na Prática - SCTEC',
+        url: 'https://sctec.scti.sc.gov.br/trilha-ia-na-pratica/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Guia para uso do Gemini',
+        url: 'https://youtu.be/riJ5dfDxftA?si=-TnyEVZH0R6mVB9Q',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Guia para uso do NotebookLM',
+        url: 'https://youtu.be/dHQNkYWc8fw?si=ISrRti3dldclVeXq',
+        icon: 'sparkles',
+      }
+    ],
+    theme: 'light',
+    animationType: 'pulse',
+    backgroundAnimation: 'pluss'
   },
   {
     id: 'coffee',

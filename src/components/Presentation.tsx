@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, CheckCircle2, Play, ChevronLeft, ChevronRight, X, Brain, Cpu, Globe, MessageSquare, Network, Sparkles, Zap, Bot, Database, Mail, Grid3x3 } from 'lucide-react';
+import { ExternalLink, CheckCircle2, Play, ChevronLeft, ChevronRight, X, Brain, Cpu, Globe, MessageSquare, Network, Sparkles, Zap, Bot, Database, Download } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import QRCode from 'react-qr-code';
 import { slides } from '../data/slides';
@@ -81,6 +81,7 @@ const BackgroundAnimation = ({
   if (type === 'question') icons = ['❓', '❔', '🤔', '💭', '🧐'];
   if (type === 'prompt') icons = ['💬', '📝', '✍️', '⚙️', '📰'];
   if (type === 'marketplace') icons = ['🛒', '🏢', '💰', '📦', '🛍️'];
+  if (type === 'pluss') icons = ['➕', '✨', '💡', '❓', '❗'];
 
   if (!useToolLogos && icons.length === 0) return null;
 
@@ -138,9 +139,9 @@ const BackgroundAnimation = ({
 
 export default function Presentation() {
   const [activeSlideId, setActiveSlideId] = useState(slides[0].id);
-  const [activeSlideContext, setActiveSlideContext] = useState('');
   const [isSlideshow, setIsSlideshow] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [activeTimelineItem, setActiveTimelineItem] = useState<string | null>(null);
 
   const startSlideshow = async () => {
     const idx = slides.findIndex(s => s.id === activeSlideId);
@@ -181,6 +182,10 @@ export default function Presentation() {
     setDirection(-1);
     setSlideIndex(prev => Math.max(prev - 1, 0));
   }, []);
+
+  const toggleTimelineItem = (key: string) => {
+    setActiveTimelineItem((prev) => (prev === key ? null : key));
+  };
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -225,19 +230,11 @@ export default function Presentation() {
     }
   }, [slideIndex, isSlideshow]);
 
-  // Update context when active slide changes
   useEffect(() => {
-    const slide = slides.find(s => s.id === activeSlideId);
-    if (slide) {
-      setActiveSlideContext(`
-        Título: ${slide.title}
-        Subtítulo: ${slide.subtitle}
-        Conteúdo: ${slide.content}
-        Exemplos: ${slide.examples ? JSON.stringify(slide.examples) : 'Nenhum exemplo específico nesta seção.'}
-      `);
-    }
-  }, [activeSlideId]);
+    setActiveTimelineItem(null);
+  }, [activeSlideId, slideIndex, isSlideshow]);
 
+ 
   const getInitialAnimation = (type?: string) => {
     switch(type) {
       case 'fade': return { opacity: 0 };
@@ -260,6 +257,30 @@ export default function Presentation() {
     }
   };
 
+  const getLinkIconComponent = (iconName: string, size = 24) => {
+    const logoMap: { [key: string]: string } = {
+      mail: logoGmail,
+      'file-text': logoDocs,
+      grid: logoPlanilha,
+      presentation: logoAprese,
+    };
+
+    const logoPath = logoMap[iconName];
+    if (logoPath) {
+      return <img src={logoPath} alt={iconName} className="object-contain" style={{ width: size, height: size }} />;
+    }
+
+    if (iconName === 'download') {
+      return <Download size={size} />;
+    }
+
+    if (iconName === 'sparkles') {
+      return <Sparkles size={size} />;
+    }
+
+    return <ExternalLink size={size} />;
+  };
+
   const renderLinksWithQRCodes = (links: { title: string; url: string; icon: string }[], isDark: boolean) => (
     <div className="mt-12 w-full flex justify-center px-4">
       <div className="qr-links-scroll flex w-full gap-6 overflow-x-auto overflow-y-hidden pb-4">
@@ -274,6 +295,9 @@ export default function Presentation() {
               isDark ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-lg shadow-slate-200/30'
             }`}
           >
+            <div className={`mb-4 ${isDark ? 'text-epagri-olive' : 'text-epagri-red'}`}>
+              {getLinkIconComponent(link.icon, 22)}
+            </div>
             <h4 className={`text-sm md:text-base font-bold mb-6 line-clamp-2 ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
               {link.title}
             </h4>
@@ -290,7 +314,7 @@ export default function Presentation() {
                   : 'bg-epagri-green text-white hover:bg-epagri-green/90'
               }`}
             >
-              <ExternalLink size={16} />
+              {getLinkIconComponent(link.icon, 16)}
               <span>Acessar</span>
             </a>
           </motion.div>
@@ -333,21 +357,6 @@ export default function Presentation() {
       {slide.links && (
         <div className="grid grid-cols-1 gap-4">
           {slide.links.map((link, idx) => {
-            const getIconComponent = (iconName: string) => {
-              const logoMap: { [key: string]: string } = {
-                'mail': logoGmail,
-                'file-text': logoDocs,
-                'grid': logoPlanilha,
-                'presentation': logoAprese,
-              };
-              
-              const logoPath = logoMap[iconName];
-              if (logoPath) {
-                return <img src={logoPath} alt={iconName} className="h-6 w-6 object-contain" />;
-              }
-              return <ExternalLink size={24} />;
-            };
-
             return (
               <a
                 key={idx}
@@ -364,7 +373,7 @@ export default function Presentation() {
                   isDark ? 'text-white' : 'text-epagri-dark group-hover:text-epagri-green'
                 }`}>{link.title}</span>
                 <div className={isDark ? 'text-epagri-olive' : 'text-epagri-red'}>
-                  {getIconComponent(link.icon)}
+                  {getLinkIconComponent(link.icon, 24)}
                 </div>
               </a>
             );
@@ -740,7 +749,7 @@ export default function Presentation() {
 
       {/* Main Content */}
       <main className="pt-20">
-        {slides.map((slide, index) => {
+        {slides.map((slide) => {
           const isDark = slide.theme === 'dark';
           const isAccent = slide.theme === 'accent';
           const shouldUseWideExamples = slide.id === 'minilab-1';
@@ -830,6 +839,8 @@ export default function Presentation() {
                           const isFirst = idx === 0;
                           const isLast = idx === slide.timeline!.length - 1;
                           const cardPositionClass = isFirst ? 'left-0' : isLast ? 'right-0' : 'left-1/2 -translate-x-1/2';
+                          const timelineKey = `${slide.id}-${idx}`;
+                          const isTimelineActive = activeTimelineItem === timelineKey;
                           
                           return (
                             <motion.div 
@@ -838,12 +849,22 @@ export default function Presentation() {
                               whileInView={{ opacity: 1, scale: 1 }}
                               transition={{ delay: idx * 0.1 }}
                               className="relative z-10 hover:z-50 flex flex-col items-center flex-1 min-w-0 group cursor-pointer"
+                              role="button"
+                              tabIndex={0}
+                              aria-expanded={isTimelineActive}
+                              onClick={() => toggleTimelineItem(timelineKey)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  toggleTimelineItem(timelineKey);
+                                }
+                              }}
                             >
                               {/* Top Section */}
                               <div className="relative flex flex-col items-center justify-end h-24 md:h-36 mb-1 w-full px-0.5 md:px-1">
                                 {isTopText ? (
                                   <>
-                                    <div className="flex flex-col items-center justify-end w-full transition-opacity duration-300 group-hover:opacity-0">
+                                    <div className={`flex flex-col items-center justify-end w-full transition-opacity duration-300 ${isTimelineActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
                                       <div className={`text-center mb-1 md:mb-2 w-full`}>
                                         <div className={`text-[8px] md:text-[11px] leading-tight line-clamp-3 md:line-clamp-4 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                                           <span className={`font-bold block mb-0.5 truncate ${isDark ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
@@ -855,7 +876,7 @@ export default function Presentation() {
                                     </div>
                                     
                                     {/* Hover Card for Top */}
-                                    <div className={`absolute bottom-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 scale-95 group-hover:scale-100 ${isDark ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
+                                    <div className={`absolute bottom-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 transition-all duration-300 ${isTimelineActive ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:scale-100'} ${isDark ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
                                       <div className={`font-display font-black text-sm md:text-base mb-1 ${isDark ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
                                       <span className={`font-bold block mb-1 text-xs md:text-sm ${isDark ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
                                       <span className={`text-[10px] md:text-xs leading-relaxed block ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</span>
@@ -878,7 +899,7 @@ export default function Presentation() {
                               <div className="relative flex flex-col items-center justify-start h-24 md:h-36 mt-1 w-full px-0.5 md:px-1">
                                 {!isTopText ? (
                                   <>
-                                    <div className="flex flex-col items-center justify-start w-full transition-opacity duration-300 group-hover:opacity-0">
+                                    <div className={`flex flex-col items-center justify-start w-full transition-opacity duration-300 ${isTimelineActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
                                       <div className={`w-px md:w-0.5 h-3 md:h-6 mb-1 ${isDark ? 'bg-epagri-olive' : 'bg-epagri-green'}`}></div>
                                       <div className={`font-display font-black text-xs md:text-xl ${isDark ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
                                       <div className={`text-center mt-1 md:mt-2 w-full`}>
@@ -890,7 +911,7 @@ export default function Presentation() {
                                     </div>
                                     
                                     {/* Hover Card for Bottom */}
-                                    <div className={`absolute top-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 scale-95 group-hover:scale-100 ${isDark ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
+                                    <div className={`absolute top-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 transition-all duration-300 ${isTimelineActive ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:scale-100'} ${isDark ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
                                       <div className={`font-display font-black text-sm md:text-base mb-1 ${isDark ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
                                       <span className={`font-bold block mb-1 text-xs md:text-sm ${isDark ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
                                       <span className={`text-[10px] md:text-xs leading-relaxed block ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</span>
@@ -1050,6 +1071,8 @@ export default function Presentation() {
                           const isFirst = idx === 0;
                           const isLast = idx === slides[slideIndex].timeline!.length - 1;
                           const cardPositionClass = isFirst ? 'left-0' : isLast ? 'right-0' : 'left-1/2 -translate-x-1/2';
+                          const timelineKey = `${slides[slideIndex].id}-${idx}`;
+                          const isTimelineActive = activeTimelineItem === timelineKey;
                           
                           return (
                             <motion.div 
@@ -1058,12 +1081,22 @@ export default function Presentation() {
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ delay: idx * 0.1 }}
                               className="relative z-10 hover:z-50 flex flex-col items-center flex-1 min-w-0 group cursor-pointer"
+                              role="button"
+                              tabIndex={0}
+                              aria-expanded={isTimelineActive}
+                              onClick={() => toggleTimelineItem(timelineKey)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  toggleTimelineItem(timelineKey);
+                                }
+                              }}
                             >
                               {/* Top Section */}
                               <div className="relative flex flex-col items-center justify-end h-24 md:h-36 mb-1 w-full px-0.5 md:px-1">
                                 {isTopText ? (
                                   <>
-                                    <div className="flex flex-col items-center justify-end w-full transition-opacity duration-300 group-hover:opacity-0">
+                                    <div className={`flex flex-col items-center justify-end w-full transition-opacity duration-300 ${isTimelineActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
                                       <div className={`text-center mb-1 md:mb-2 w-full`}>
                                         <div className={`text-[8px] md:text-[11px] leading-tight line-clamp-3 md:line-clamp-4 ${slides[slideIndex].theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>
                                           <span className={`font-bold block mb-0.5 truncate ${slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
@@ -1075,7 +1108,7 @@ export default function Presentation() {
                                     </div>
                                     
                                     {/* Hover Card for Top */}
-                                    <div className={`absolute bottom-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 scale-95 group-hover:scale-100 ${slides[slideIndex].theme === 'dark' ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
+                                    <div className={`absolute bottom-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 transition-all duration-300 ${isTimelineActive ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:scale-100'} ${slides[slideIndex].theme === 'dark' ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
                                       <div className={`font-display font-black text-sm md:text-base mb-1 ${slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
                                       <span className={`font-bold block mb-1 text-xs md:text-sm ${slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
                                       <span className={`text-[10px] md:text-xs leading-relaxed block ${slides[slideIndex].theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</span>
@@ -1098,7 +1131,7 @@ export default function Presentation() {
                               <div className="relative flex flex-col items-center justify-start h-24 md:h-36 mt-1 w-full px-0.5 md:px-1">
                                 {!isTopText ? (
                                   <>
-                                    <div className="flex flex-col items-center justify-start w-full transition-opacity duration-300 group-hover:opacity-0">
+                                    <div className={`flex flex-col items-center justify-start w-full transition-opacity duration-300 ${isTimelineActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
                                       <div className={`w-px md:w-0.5 h-3 md:h-6 mb-1 ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive' : 'bg-epagri-green'}`}></div>
                                       <div className={`font-display font-black text-xs md:text-xl ${slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
                                       <div className={`text-center mt-1 md:mt-2 w-full`}>
@@ -1110,7 +1143,7 @@ export default function Presentation() {
                                     </div>
                                     
                                     {/* Hover Card for Bottom */}
-                                    <div className={`absolute top-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 scale-95 group-hover:scale-100 ${slides[slideIndex].theme === 'dark' ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
+                                    <div className={`absolute top-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 transition-all duration-300 ${isTimelineActive ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:scale-100'} ${slides[slideIndex].theme === 'dark' ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
                                       <div className={`font-display font-black text-sm md:text-base mb-1 ${slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
                                       <span className={`font-bold block mb-1 text-xs md:text-sm ${slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
                                       <span className={`text-[10px] md:text-xs leading-relaxed block ${slides[slideIndex].theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</span>

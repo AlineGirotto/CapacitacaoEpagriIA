@@ -87,7 +87,7 @@ const BackgroundAnimation = ({
   if (!useToolLogos && icons.length === 0) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-15">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-10">
       <style>{`
         @keyframes floatUp {
           0% { top: 110%; }

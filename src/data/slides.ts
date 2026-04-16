@@ -1,6 +1,7 @@
 ﻿export interface SlideData {
   id: string;
   title: string;
+  subtitle: string;
   content: string;
   spotlightQuote?: string;
   productBadge?: 'gemini' | 'notebooklm';
@@ -24,21 +25,9 @@
 
 export const slides: SlideData[] = [
   {
-    id: 'presenca',
-    title: 'Registre sua presença!',
-    content: `
-**Escaneie o QR Code na tela para registrar sua presença nesta capacitação.**
-
-Assim, poderemos enviar o certificado de participação e materiais complementares diretamente para o seu e-mail.
-`,
-    qrCode: 'https://www.epagri.sc.gov.br/CapacitacaoEpagriIA/',
-    theme: 'light',
-    animationType: 'bounce',
-    backgroundAnimation: 'tech'
-  },
-  {
     id: 'welcome',
     title: 'IA na Prática: Ecossistema Google e Produtividade',
+    subtitle: 'Boas-vindas, Epagrianos! 🚀',
     content: `
 ### Estamos muito felizes em ter você aqui! 🌟
 
@@ -54,6 +43,7 @@ Acesse esta apresentação interativa no seu dispositivo apontando a câmera par
   {
     id: 'questionamento',
     title: 'O que é Inteligência Artificial?',
+    subtitle: 'Interação Inicial',
     content: `
 Antes de mergulharmos no universo da IA, resuma em **até 4 palavras** o que você entende por "Inteligência Artificial".
 
@@ -69,6 +59,7 @@ Para isso, acesse o QR Code pelo celular e envie sua resposta. Vamos criar uma n
   {
     id: 'intro-1',
     title: 'Inteligência Artificial',
+    subtitle: 'Módulo 1: Introdução e Contexto',
     content: `
 A Inteligência Artificial Generativa não veio para substituir, mas para **amplificar a nossa capacidade técnica**. Nosso foco será em ferramentas corporativas que garantem a segurança e a governança dos dados da EPAGRI.
 
@@ -88,6 +79,7 @@ A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, preve
   {
     id: 'intro-2',
     title: 'A Evolução Histórica da IA',
+    subtitle: 'Módulo 1: História',
     content: `A jornada até a IA Generativa foi longa e cheia de marcos importantes:`,
     timeline: [
       { year: '1950', title: 'Teste de Turing', description: 'Alan Turing propõe um teste para determinar se uma máquina pode exibir comportamento inteligente.' },
@@ -107,6 +99,7 @@ A IA Generativa funciona como um 'autocompletar' extremamente sofisticado, preve
   {
     id: 'motor',
     title: 'Automação vs. Inteligência Artificial',
+    subtitle: 'Módulo 2: Automação vs. IA',
     content: `
 A distinção fundamental entre automação e IA reside na transição de sistemas que apenas seguem ordens para sistemas que aprendem a decidir. 
 Enquanto a automação opera como um 'músculo' programado para tarefas repetitivas sob regras rígidas, a IA atua como um 'cérebro' capaz de analisar contextos, 
@@ -130,10 +123,11 @@ aprender com o histórico e lidar com ambiguidades.
   {
     id: 'etica',
     title: 'Cuidados, Ética e Governança',
+    subtitle: 'Módulo 3: Uso Responsável',
     content: `
 O uso da IA exige responsabilidade, senso crítico e ética, especialmente no setor público.
 
-* **Privacidade e Confidencialidade:** O contrato Google Enterprise da EPAGRI assegura que nossos dados institucionais **não** são utilizados para treinar os modelos públicos. O ambiente se torna "isolado e seguro", mas é fundamental evitar o compartilhamento de informações sensíveis ou pessoais em prompts.
+* **Privacidade e Confidencialidade:** O contrato Google Workspace da EPAGRI assegura que **nossos dados institucionais não são utilizados para treinar os modelos públicos**. O ambiente se torna "isolado e seguro", mas é fundamental evitar o compartilhamento de informações sensíveis ou pessoais em prompts.
 * **Risco de Alucinação:** A IA é probabilística, não um banco de dados exato. Ela pode inventar dados, leis, referências bibliográficas ou fatos históricos com muita convicção.
 * **LGPD e Viés Algorítmico:** Modelos de IA podem refletir e amplificar preconceitos presentes nos dados de treinamento. Tenha cuidado redobrado ao processar dados sensíveis, informações pessoais ou ao tomar decisões que afetem cidadãos.
 * **Direitos Autorais e Propriedade Intelectual:** A IA pode gerar conteúdo que infringe direitos autorais ou que é baseado em obras protegidas. Sempre verifique a origem e a legalidade do material gerado, especialmente para publicações oficiais.
@@ -148,6 +142,7 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
   {
     id: 'epagri-regras-direitos',
     title: 'IA na Epagri: Regras e Direitos',
+    subtitle: 'Módulo 3: Uso Responsável',
     content: `
 * **Princípios Obrigatórios:** Coletar o mínimo de dados possível (Necessidade), usar apenas para fins legítimos (Finalidade), com segurança e rastreabilidade (logs).
 * **Diretrizes da POSIN:** Priorizar a não utilização de dados pessoais em IAs; a implementação de qualquer nova tecnologia exige avaliação prévia da TI e do DPO.
@@ -161,6 +156,7 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
   {
     id: 'epagri-riscos-criticos',
     title: 'Riscos Críticos e Como Agir',
+    subtitle: 'Módulo 3: Uso Responsável',
     content: `
 * **Perda de Patente:** Inserir dados de pesquisas inéditas em IAs abertas (ex: ChatGPT) torna a informação pública e impede o registro legal da patente.
 * **Vazamento de Dados:** É vedado inserir relatórios com dados pessoais (CPFs, nomes) em ferramentas externas não auditadas.
@@ -175,6 +171,7 @@ O uso da IA exige responsabilidade, senso crítico e ética, especialmente no se
   {
     id: 'prompts-intro',
     title: 'A Arte do Prompt: Conceitos e Técnicas',
+    subtitle: 'Módulo 4: Comunicação com a Máquina',
     content: `
 **O Prompt é a ponte entre a sua mente e a máquina.**
 
@@ -194,6 +191,7 @@ Mude a mentalidade de "escrever" para "especificar". Em essência, é a instruç
   {
     id: 'prompts-formulas-1',
     title: 'Fórmulas de Estruturação: FOCO e PTF',
+    subtitle: 'Módulo 4: Prompts Estruturados',
     content: `
 Veja abaixo duas fórmulas simples para montar prompts mais claros e úteis no dia a dia.
     `,
@@ -207,7 +205,7 @@ Veja abaixo duas fórmulas simples para montar prompts mais claros e úteis no d
         exampleItems: [
           'Foco: impacto da seca na produção de milho em SC.',
           'Objetivo: analisar a perda de produtividade na safra 25/26.',
-          'Contexto: usar dados da EPAGRI e considerar o período de nov a mar.',
+          'Contexto: usar dados da EPAGRI e considerar o período de novembro a março.',
           'Output: redigir um parágrafo técnico de 5 linhas.',
         ],
       },
@@ -230,6 +228,7 @@ Veja abaixo duas fórmulas simples para montar prompts mais claros e úteis no d
   {
     id: 'prompts-formulas-2',
     title: 'Fórmulas de Estruturação: CARE, PEPE e TAO',
+    subtitle: 'Módulo 4: Prompts Estruturados',
     content: `
 Estas três fórmulas ajudam quando você precisa padronizar respostas, organizar etapas ou pedir algo de forma direta.
     `,
@@ -278,6 +277,7 @@ Estas três fórmulas ajudam quando você precisa padronizar respostas, organiza
   {
     id: 'minilab-1',
     title: 'Mini-Lab 1: Prompts',
+    subtitle: 'Prática',
     content: `
 **Mão na massa!**
 
@@ -305,8 +305,11 @@ Vamos criar prompts estruturados para as diferentes áreas da EPAGRI utilizando 
   {
     id: 'notebooklm',
     title: 'NotebookLM: Análise de Bases',
+    subtitle: 'Módulo 5: NotebookLM',
     content: `
-O **NotebookLM** é uma IA que responde **apenas** com base nos documentos. Ele não busca conhecimento na internet, mas sim no conteúdo específico que você fornece, garantindo respostas precisas e contextualizadas.
+O **NotebookLM** é uma IA que responde **apenas com base nos documentos**. Ele não busca conhecimento na internet, mas sim no conteúdo específico que você fornece, garantindo respostas precisas e contextualizadas.
+
+Para acessar, basta ter uma conta Google e acessar o [link oficial](https://notebooklm.google.com/). O ambiente é seguro, não utiliza dados para treinamento externo e é integrado ao Google Drive, permitindo que você crie "notebooks" com documentos, PDFs, imagens e outros arquivos para usar como base de consulta.
 
 **Exemplos de uso na EPAGRI:**
 
@@ -334,10 +337,11 @@ Veja alguns cenários em que o NotebookLM pode apoiar diferentes áreas com mais
   {
     id: 'minilab-3',
     title: 'Mini-Lab 3: Notebook',
+    subtitle: 'Prática',
     content: `
 **Exercício prático com documentos reais.**
 
-Vamos baixar os arquivos de referência, subir no NotebookLM e usar esse material como contexto para perguntas e resumos.
+Acesse o [NotebookLM](https://notebooklm.google.com/) e faça o upload dos documentos indicados nos links laterais.
     `,
     productBadge: 'notebooklm',
     links: [
@@ -345,8 +349,9 @@ Vamos baixar os arquivos de referência, subir no NotebookLM e usar esse materia
       { title: 'Regimento Interno', url: 'https://transparencia.epagri.sc.gov.br/wp-content/uploads/2026/02/REG.DEX_.0001.v02.03-Regimento-Interno-EPAGRI-2026_compressed.pdf', icon: 'download' }
     ],
     examples: [
-      { area: 'Passo 1', text: 'Baixe os dois arquivos indicados no slide e faça o upload deles no NotebookLM para montar a base de consulta.' },
-      { area: 'Passo 2', text: 'Faremos perguntas sobre os documentos carregados para extrair informações relevantes. Pergunte sobre as atribuições do seu cargo ou do seu departamento estadual.' },
+      { area: 'Passo 1', text: 'Baixe os dois arquivos indicados no slide e faça o upload deles no NotebookLM para montar a base de consulta. Em seguida, anexe os documentos na lateral esquerda.' },
+      { area: 'Passo 2', text: 'Faremos perguntas sobre os documentos carregados para extrair informações relevantes. Podemos também pedir resumos, apresentações, vídeos, podcasts e outros formatos de conteúdo.' },
+      { area: 'Exemplos', text: '"Qual a função do meu departamento xxx?", "Quais são as progressões de carreira disponíveis?", "Quais são as responsabilidades do meu cargo?"' },
 ],
     theme: 'light',
     animationType: 'float',
@@ -355,18 +360,25 @@ Vamos baixar os arquivos de referência, subir no NotebookLM e usar esse materia
   {
     id: 'gemini-gems',
     title: 'Gemini e Gem',
+    subtitle: 'Módulo 6: Gemini & Gem',
     content: `
 O **Gemini** é a nova geração de LLMs do Google, com capacidade multimodal nativa (texto, imagem, áudio e vídeo). Possui uma "janela de contexto" de até 2 milhões de tokens, permitindo processar grandes volumes de informação em uma única interação.
 
+Para acessar, basta ter uma conta Google e entrar no [link oficial](https://gemini.google.com/). Essa ferramenta não utiliza dados para treinamento externo e está integrada à nossa conta Workspace, permitindo que você anexe documentos do Google Drive como base de consulta, assim como no NotebookLM. A diferença é a capacidade de processar um volume maior de informações em uma única interação e gerar respostas mais complexas.
+
 **Gems (Agentes Personalizados):**
-O Gem do Google é um agente personalizado que pode ser treinado com dados específicos para realizar tarefas especializadas e repetitivas.
-    `,
+O Gem do Google é um agente personalizado que pode ser configurado com dados específicos para realizar tarefas especializadas e repetitivas. Basta especificar o comportamento desejado e fornecer exemplos: o Gem passa a executar essa função de forma autônoma, respondendo a comandos ou perguntas relacionadas à tarefa.
+
+`,
   productBadge: 'gemini',
-    examples: [
-      { area: 'Aquisições', text: 'Um Gem treinado com as regras de compras públicas para auxiliar na elaboração de Estudos Técnicos Preliminares (ETP) e Termos de Referência (TR).' },
-      { area: 'Marketing', text: 'Um Gem "Revisor Técnico" que sempre ajusta textos para a linguagem padrão de publicações da EPAGRI.' },
-      { area: 'Financeiro', text: 'Um Gem voltado para apoiar a leitura de normativos internos, resumir orientações recorrentes e sugerir rascunhos de explicação sobre rotinas de prestação de contas e despesas.' }
-    ],
+  examples: [
+    { area: 'Criar Imagem', text: 'Crie imagens de alta qualidade a partir de descrições textuais, ideal para materiais de divulgação e ilustrações técnicas. ' },
+    { area: 'Canvas', text: 'Use a janela lateral para criar e editar documentos, códigos ou aplicativos em tempo real, sem sair da conversa principal.' },
+    { area: 'Deep Research', text: 'Automatize pesquisas complexas, navegando na web para analisar múltiplas fontes, relatórios e documentos, ideal para análises de mercado e revisão de literatura.' },
+    { area: 'Gerar Vídeo', text: 'Transforme roteiros em vídeos curtos, perfeito para comunicação interna e redes sociais.' },
+    { area: 'Criar Música', text: 'Gere trilhas sonoras personalizadas, músicas com vocais, letras e arranjos instrumentais completos a partir de comandos de texto ou imagens.' },
+    { area: 'Aprendizado Guiado', text: 'Ative o modo de estudo interativo que funciona como um tutor particular, se concentrando na compreensão do assunto, ideal para treinamentos e capacitações internas.' }
+  ],
     theme: 'light',
     animationType: 'pulse',
     backgroundAnimation: 'gemini'
@@ -374,20 +386,25 @@ O Gem do Google é um agente personalizado que pode ser treinado com dados espec
   {
     id: 'minilab-4',
     title: 'Mini-Lab 4: Gemini & Gem',
+    subtitle: 'Prática',
     content: `
 **Exercício prático, mão na massa!**
 
 Vamos explorar como usar as duas ferramentas em conjunto para potencializar a análise e a criação de conteúdo.
-    `,
+
+Acesse o [Gemini](https://gemini.google.com/) e faça o upload dos mesmos documentos do mini-lab anterior para comparar as respostas entre o NotebookLM e o Gemini, além de experimentar a criação de um Gem personalizado para uma tarefa específica.
+`,
   productBadge: 'gemini',
   links: [
-      { title: 'PCCS', url: 'https://drive.google.com/file/d/1AltTp3d64E6GfyD4RFSY3yev4mDovBfe/view', icon: 'download' },
-      { title: 'Regimento Interno', url: 'https://transparencia.epagri.sc.gov.br/wp-content/uploads/2026/02/REG.DEX_.0001.v02.03-Regimento-Interno-EPAGRI-2026_compressed.pdf', icon: 'download' }
+    { title: 'PCCS', url: 'https://drive.google.com/file/d/1AltTp3d64E6GfyD4RFSY3yev4mDovBfe/view', icon: 'download' },
+    { title: 'Regimento Interno', url: 'https://transparencia.epagri.sc.gov.br/wp-content/uploads/2026/02/REG.DEX_.0001.v02.03-Regimento-Interno-EPAGRI-2026_compressed.pdf', icon: 'download' }
+  ],
+  examples: [
+   { area: 'Aquisições', text: 'Um Gem treinado com as regras de compras públicas para auxiliar na elaboração de Estudos Técnicos Preliminares (ETP) e Termos de Referência (TR).' },
+    { area: 'Marketing', text: 'Um Gem "Revisor Técnico" que sempre ajusta textos para a linguagem padrão de publicações da EPAGRI.' },
+    { area: 'Financeiro', text: 'Um Gem voltado para apoiar a leitura de normativos internos, resumir orientações recorrentes e sugerir rascunhos de explicação sobre rotinas de prestação de contas e despesas.' },
+    { area: 'Gestão de Pessoas', text: 'Um Gem voltado para apoiar a leitura de normativos internos, resumir orientações recorrentes e sanar dúvidas relacionadas a recursos humanos.' }
     ],
-    examples: [
-      { area: 'Passo 1', text: 'Baixe os dois arquivos indicados no slide e faça o upload deles no Gemini para montar a base de consulta.' },
-      { area: 'Passo 2', text: 'Vamos pedir para gerar um relatório com as atribuições do seu cargo ou do seu departamento estadual.' },
-],
     theme: 'light',
     animationType: 'float',
     backgroundAnimation: 'gemini'
@@ -395,6 +412,7 @@ Vamos explorar como usar as duas ferramentas em conjunto para potencializar a an
   {
     id: 'materiais',
     title: 'Extras',
+    subtitle: 'Materiais e Ferramentas Adicionais',
     content: `
 **Recursos adicionais para explorar:**
 
@@ -446,6 +464,7 @@ Se preferir, temos uma pasta compartilhada no Drive para acessar os materiais: [
   {
     id: 'workspace-text',
     title: 'Workspace I: Redação e Análise',
+    subtitle: 'Módulo 7',
     content: `
 A IA já está embutida no Google Workspace, trazendo funcionalidades avançadas para redação, análise de dados e criação de conteúdo visual.
 
@@ -472,6 +491,7 @@ A IA já está embutida no Google Workspace, trazendo funcionalidades avançadas
   {
     id: 'workspace-data',
     title: 'Workspace II: Dados e Visual',
+    subtitle: 'Módulo 8',
     content: `
 A IA também potencializa a análise de dados e a criação de conteúdo visual, transformando a forma como interagimos com planilhas e apresentações.
 
@@ -495,54 +515,25 @@ A IA também potencializa a análise de dados e a criação de conteúdo visual,
   },
   {
     id: 'panorama-1',
-    title: 'Geradores de Imagens',
+    title: 'Panorama de Mercado',
+    subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
-Ferramentas para criação de materiais de divulgação, ilustrações técnicas e prototipagem visual, semelhantes ao **Nano Banana** do Google.
+O ecossistema de IA vai muito além do Gemini e do NotebookLM. Há um mercado amplo de ferramentas especializadas por tipo de tarefa. A maioria possui planos gratuitos, mas **muita atenção:** em contas sem licenciamento corporativo (ou a critério da plataforma), os dados inseridos podem ser usados para treinar modelos públicos e podem ocorrer vazamentos de informação. Se for utilizar essas ferramentas, evite inserir dados institucionais ou pessoais.
 
-* **Midjourney:** Referência em qualidade estética e realismo. Operado via Discord, ideal para campanhas de alto impacto visual (Comunicação e Marketing).
-* **DALL-E 3 (OpenAI):** Integrado ao ecossistema Microsoft e ChatGPT. Preciso ao seguir instruções complexas e renderizar textos legíveis nas imagens.
-* **Adobe Firefly:** A escolha para compliance e segurança jurídica. Treinado em bancos de imagens licenciadas (Adobe Stock), garantindo que não infrinjam direitos autorais.
-    `,
-    theme: 'light',
-    animationType: 'slide',
-    backgroundAnimation: 'marketplace'
-  },
-  {
-    id: 'panorama-2',
-    title: 'Texto, Raciocínio e Vídeos',
-    content: `
-**IA Generativa de Texto e Raciocínio (LLMs), semelhante ao Gemini:**
-* **ChatGPT (OpenAI):** Pioneiro e versátil. Excelente para raciocínio lógico e suporte à programação.
-* **Claude (Anthropic):** Focado em segurança e escrita humanizada. Grande "janela de contexto", ideal para analisar múltiplos PDFs simultaneamente (Jurídico e Pesquisa).
-* **DeepSeek:** Alta eficiência e baixo custo. Performance excepcional em matemática, lógica e codificação.
-
-**Criadores de Vídeos (Text-to-Video):**
-* **Sora (OpenAI):** Alta fidelidade para vídeos de até 1 minuto com consistência física *(até 26 de abril de 2026)*.
-* **Luma Dream Machine:** Acessível e de alta qualidade. Útil para animar fotos históricas.
-* **Kling AI:** Potente para movimentos complexos e vídeos longos (até 2 minutos), ideal para tutoriais.
-    `,
-    theme: 'light',
-    animationType: 'float',
-    backgroundAnimation: 'marketplace'
-  },
-  {
-    id: 'panorama-3',
-    title: 'Prototipagem, Automação e Apresentações',
-    content: `
-**Criação de Apresentações:**
-* **Beautiful.ai:** IA focada em design que ajusta o layout automaticamente.
-* **Tome:** Focado em "storytelling" assistido por IA.
-* **Prezi AI:** Estruturas de zoom e mapas mentais dinâmicos a partir de textos.
-
-**Insights e Prototipagem:**
-* **Google AI Studio:** Ambiente para desenvolvedores testarem o Gemini 1.5 Pro com até 2 milhões de tokens.
-* **Gamma App:** Cria sites e apresentações instantaneamente a partir de um prompt.
-* **Framer AI:** Design profissional de sites com layouts responsivos gerados por IA.
-
-**Gerenciadores de Fluxos (No-Code):**
-* **Make:** Interface visual sofisticada para fluxos complexos.
-* **n8n:** Alternativa poderosa com instalação em servidores próprios (self-hosted).
-* **Zapier:** Líder em integrações simples e ecossistema de apps.
+| Categoria | Ferramenta | Diferencial |
+|---|---|---|
+| 🖼️ Imagens | **Midjourney** | Estética e realismo. Opera via Discord |
+| 🖼️ Imagens | **DALL-E 3** | Integrado ao ChatGPT, preciso com textos |
+| 🖼️ Imagens | **Adobe Firefly** | Treinado em imagens licenciadas (sem risco autoral) |
+| 💬 Texto / LLM | **ChatGPT** | Pioneiro, versátil, forte em raciocínio lógico |
+| 💬 Texto / LLM | **Claude** | Escrita humanizada, grande janela de contexto |
+| 💬 Texto / LLM | **DeepSeek** | Alta eficiência em matemática e codificação |
+| 🎬 Vídeo | **Sora** | Alta fidelidade, até 1 min |
+| 🎬 Vídeo | **Kling AI** | Movimentos complexos, vídeos mais longos |
+| 🛠️ Apresentações | **Gamma App** | Sites e slides gerados instantaneamente por prompt |
+| 🛠️ Apresentações | **Beautiful.ai** | Layout ajustado automaticamente por IA |
+| ⚙️ Automação | **Make / n8n** | Fluxos visuais no-code para integração de sistemas |
+| ⚙️ Automação | **Zapier** | Líder em integrações simples entre apps |
     `,
     theme: 'light',
     animationType: 'slide',
@@ -551,19 +542,21 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
   {
     id: 'panorama-4',
     title: 'Ferramentas Setoriais',
+    subtitle: 'Módulo 9: Panorama de Mercado',
     content: `
-**Para Pesquisa e Ensino:**
-* **Perplexity AI:** Motor de busca que cita fontes acadêmicas em tempo real.
-* **Scite.ai:** Analisa o contexto de citações em artigos científicos.
-* **Consensus:** Um motor de busca que usa IA para extrair conclusões diretamente de artigos científicos revisados por pares.
-* **ChatPDF / AskYourPDF:** Analisa rapidamente editais de licitação volumosos, buscando palavras-chave e prazos.
+  Para aplicação prática no setor público, estas ferramentas se destacam por área de uso. A tabela abaixo resume o foco de cada uma e quando vale acioná-las no dia a dia.
 
-**Para Jurídico, RH e Administração:**
-* **Projuris Contratos:** Solução para extrair dados de documentos, controlar prazos de renovação automaticamente e gerir o ciclo de vida contratual.
-* **Gupy Clima e Engajamento:** Utilizada para analisar o sentimento dos servidores em pesquisas internas, ajudando a identificar focos de desmotivação ou sobrecarga antes que se tornem problemas de gestão.
-* **IBM watsonx Orchestrate:** Oferece agentes de IA que automatizam tarefas complexas de RH entre sistemas, como extração de dados para folhas de pagamento ou gestão de benefícios de forma segura e em escala.
-* **Jus IA:** Plataforma brasileira que analisa jurisprudência e gera peças jurídicas.
-* **Alice (CGU):** Ferramenta desenvolvida pela Controladoria-Geral da União que usa IA para analisar editais e atas de registro de preços, identificando riscos de irregularidades ou sobrepreço automaticamente.
+  | Categoria | Ferramenta | Objetivo |
+  |---|---|---|
+  | Pesquisa e Ensino | **Perplexity AI** | Busca com citação de fontes em tempo real |
+  | Pesquisa e Ensino | **Scite.ai** | Mostra contexto e qualidade das citações científicas |
+  | Pesquisa e Ensino | **Consensus** | Extrai conclusões de artigos revisados por pares |
+  | Pesquisa e Ensino | **ChatPDF / AskYourPDF** | Leitura rápida de editais e documentos longos |
+  | Jurídico e Administrativo | **Projuris Contratos** | Gestão de ciclo contratual e alertas de prazo |
+  | RH e Gestão | **Gupy Clima e Engajamento** | Análise de sentimento em pesquisas internas |
+  | RH e Operações | **IBM watsonx Orchestrate** | Automação de tarefas de RH entre sistemas |
+  | Jurídico | **Jus IA** | Pesquisa de jurisprudência e apoio a peças jurídicas |
+  | Controle e Compliance | **Alice (CGU)** | Detecta riscos em editais e atas de registro de preços |
 
     `,
     theme: 'light',
@@ -573,6 +566,7 @@ Ferramentas para criação de materiais de divulgação, ilustrações técnicas
   {
     id: 'oficina',
     title: 'Oficina de Projetos',
+    subtitle: 'Laboratório Final',
     content: `
 **Desenvolvimento da solução.**
 
@@ -592,6 +586,7 @@ Desenvolvam uma solução utilizando o **Gemini, Gem** e/ou o **NotebookLM** e p
   {
     id: 'showcase',
     title: 'Showcase',
+    subtitle: 'Apresentação dos Projetos',
     content: `
 **Apresentação dos Projetos**
 
@@ -606,6 +601,7 @@ Chegou a hora de compartilhar as soluções desenvolvidas com a turma! Cada grup
   {
     id: 'celebration',
     title: 'Parabéns a Todos! 🎉🥳',
+    subtitle: 'Encerramento',
     content: `
 
 O futuro é promissor e cheio de possibilidades. Continuem explorando, experimentando e inovando com as ferramentas que conhecemos. O conhecimento é o primeiro passo para a transformação na EPAGRI!
@@ -624,6 +620,7 @@ Estamos à disposição para apoiar a implementação dos projetos e para contin
   {
     id: 'avaliacao',
     title: 'Sua Opinião É Importante!',
+    subtitle: 'Avaliação da Capacitação',
     content: `
 **Queremos saber sua experiência!**
 
@@ -641,6 +638,7 @@ Acesse o QR Code no seu celular e responda ao nosso formulário de avaliação. 
   {
     id: 'complementares',
     title: 'Materiais Complementares',
+    subtitle: 'Recursos para Aprofundamento',
     content: `
 **Explore mais sobre IA com estes recursos adicionais:**
 
@@ -670,6 +668,7 @@ Confira os materiais complementares para reforçar os conceitos e o uso das ferr
   {
     id: 'coffee',
     title: 'Coffee Break',
+    subtitle: 'Intervalo de Integração',
     content: `
 Pausa para um café e networking. Voltamos em breve!
     `,
@@ -680,6 +679,7 @@ Pausa para um café e networking. Voltamos em breve!
   {
     id: 'almoco',
     title: 'Almoço',
+    subtitle: 'Intervalo',
     content: `
 **Bom apetite!** Retornamos após o almoço.
     `,

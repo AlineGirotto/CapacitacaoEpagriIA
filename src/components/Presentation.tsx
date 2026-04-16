@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, CheckCircle2, Play, ChevronLeft, ChevronRight, X, Brain, Cpu, Globe, MessageSquare, Network, Sparkles, Zap, Bot, Database, Download } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, CheckCircle2, Brain, Cpu, Globe, MessageSquare, Network, Sparkles, Zap, Bot, Database, Download } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import QRCode from 'react-qr-code';
 import { slides } from '../data/slides';
 import logoEpagri from '../img/logoEpagri.png';
@@ -140,100 +141,15 @@ const BackgroundAnimation = ({
 
 export default function Presentation() {
   const [activeSlideId, setActiveSlideId] = useState(slides[0].id);
-  const [isSlideshow, setIsSlideshow] = useState(false);
-  const [slideIndex, setSlideIndex] = useState(0);
   const [activeTimelineItem, setActiveTimelineItem] = useState<string | null>(null);
-
-  const startSlideshow = async () => {
-    const idx = slides.findIndex(s => s.id === activeSlideId);
-    setSlideIndex(idx >= 0 ? idx : 0);
-    setIsSlideshow(true);
-    try {
-      if (document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen();
-      }
-    } catch (err) {
-      console.error("Error attempting to enable fullscreen:", err);
-    }
-  };
-
-  const exitSlideshow = async () => {
-    setIsSlideshow(false);
-    try {
-      if (document.fullscreenElement) {
-        await document.exitFullscreen();
-      }
-    } catch (err) {
-      console.error("Error attempting to exit fullscreen:", err);
-    }
-    setTimeout(() => {
-      const el = document.getElementById(slides[slideIndex].id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const [direction, setDirection] = useState(0);
-
-  const nextSlide = useCallback(() => {
-    setDirection(1);
-    setSlideIndex(prev => Math.min(prev + 1, slides.length - 1));
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setDirection(-1);
-    setSlideIndex(prev => Math.max(prev - 1, 0));
-  }, []);
 
   const toggleTimelineItem = (key: string) => {
     setActiveTimelineItem((prev) => (prev === key ? null : key));
   };
 
   useEffect(() => {
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement && isSlideshow) {
-        setIsSlideshow(false);
-      }
-    };
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  }, [isSlideshow]);
-
-  useEffect(() => {
-    if (!isSlideshow) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-        nextSlide();
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        prevSlide();
-      } else if (e.key === 'Escape') {
-        exitSlideshow();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isSlideshow, nextSlide, prevSlide]);
-
-  useEffect(() => {
-    if (isSlideshow) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isSlideshow]);
-
-  // Sync activeSlideId when in slideshow
-  useEffect(() => {
-    if (isSlideshow) {
-      setActiveSlideId(slides[slideIndex].id);
-    }
-  }, [slideIndex, isSlideshow]);
-
-  useEffect(() => {
     setActiveTimelineItem(null);
-  }, [activeSlideId, slideIndex, isSlideshow]);
+  }, [activeSlideId]);
 
  
   const getInitialAnimation = (type?: string) => {
@@ -282,9 +198,13 @@ export default function Presentation() {
     return <ExternalLink size={size} />;
   };
 
-  const renderLinksWithQRCodes = (links: { title: string; url: string; icon: string }[], isDark: boolean) => (
+  const renderLinksWithQRCodes = (
+    links: { title: string; url: string; icon: string }[],
+    isDark: boolean,
+    showQRCode = true,
+  ) => (
     <div className="mt-12 w-full flex justify-center px-4">
-      <div className="qr-links-scroll flex w-full gap-6 overflow-x-auto overflow-y-hidden pb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full">
         {links.map((link) => (
           <motion.div
             key={link.url}
@@ -292,19 +212,21 @@ export default function Presentation() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className={`rounded-2xl border p-8 flex flex-col items-center justify-center text-center flex-shrink-0 w-56 ${
+            className={`rounded-2xl border p-6 flex flex-col items-center justify-center text-center ${
               isDark ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-lg shadow-slate-200/30'
             }`}
           >
             <div className={`mb-4 ${isDark ? 'text-epagri-olive' : 'text-epagri-red'}`}>
               {getLinkIconComponent(link.icon, 22)}
             </div>
-            <h4 className={`text-sm md:text-base font-bold mb-6 line-clamp-2 ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
+            <h4 className={`text-sm md:text-base font-bold ${showQRCode ? 'mb-6' : 'mb-4'} line-clamp-2 ${isDark ? 'text-white' : 'text-epagri-dark'}`}>
               {link.title}
             </h4>
-            <div className="bg-white p-4 rounded-lg shadow-inner mb-6 flex items-center justify-center">
-              <QRCode value={link.url} size={160} level="H" />
-            </div>
+            {showQRCode && (
+              <div className="bg-white p-4 rounded-lg shadow-inner mb-6 flex items-center justify-center">
+                <QRCode value={link.url} size={160} level="H" />
+              </div>
+            )}
             <a
               href={link.url}
               target="_blank"
@@ -324,29 +246,29 @@ export default function Presentation() {
     </div>
   );
 
-  const renderSidebar = (slide: typeof slides[0], isDark: boolean, isPresentation = false) => (
-    <div className={isPresentation ? 'space-y-4' : 'space-y-6 sticky top-28'}>
+  const renderSidebar = (slide: typeof slides[0], isDark: boolean) => (
+    <div className="space-y-6 sticky top-28">
       {slide.qrCode && (
-        <div className={`${isPresentation ? 'p-5 md:p-6' : 'p-8'} rounded-3xl border flex flex-col items-center justify-center text-center ${
+        <div className={`p-8 rounded-3xl border flex flex-col items-center justify-center text-center ${
           isDark ? 'bg-white/5 border-white/10' : 
           'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
         }`}>
           {slide.id !== 'presenca' && (
-            <h3 className={`${isPresentation ? 'text-base md:text-lg mb-4' : 'text-xl mb-6'} font-bold ${
+            <h3 className={`text-xl mb-6 font-bold ${
               isDark ? 'text-white' : 'text-epagri-dark'
             }`}>
                 Acesse o material
             </h3>
           )}
-          <div className={`bg-white rounded-xl shadow-inner ${isPresentation ? 'p-3 mb-3' : 'p-4 mb-4'}`}>
+          <div className="bg-white rounded-xl shadow-inner p-4 mb-4">
             {slide.id === 'presenca' ? (
-              <img src={imagemPresenca} alt="QR Code Presença" className={`${isPresentation ? 'w-[220px] h-[220px]' : 'w-[300px] h-[300px]'} object-contain`} />
+              <img src={imagemPresenca} alt="QR Code Presença" className="w-[300px] h-[300px] object-contain" />
             ) : (
-              <QRCode value={slide.qrCode} size={isPresentation ? 150 : 200} level="H" />
+              <QRCode value={slide.qrCode} size={200} level="H" />
             )}
           </div>
           {slide.id !== 'presenca' && (
-            <p className={`${isPresentation ? 'text-xs' : 'text-sm'} ${
+            <p className={`text-sm ${
               isDark ? 'text-slate-300' : 'text-slate-600'
             }`}>
               Escaneie com a câmera do seu celular
@@ -364,17 +286,17 @@ export default function Presentation() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex items-center justify-between ${isPresentation ? 'p-4 md:p-5' : 'p-6'} rounded-2xl transition-all ${
+                className={`group flex items-center justify-between p-6 rounded-2xl transition-all ${
                   isDark 
                     ? 'bg-white/10 hover:bg-white/20 border border-white/10' 
                     : 'bg-white border-2 border-epagri-light/20 hover:border-epagri-green shadow-sm hover:shadow-md'
                 }`}
               >
-                <span className={`font-bold ${isPresentation ? 'text-base md:text-lg' : 'text-lg'} ${
+                <span className={`font-bold text-lg ${
                   isDark ? 'text-white' : 'text-epagri-dark group-hover:text-epagri-green'
                 }`}>{link.title}</span>
                 <div className={isDark ? 'text-epagri-olive' : 'text-epagri-red'}>
-                  {getLinkIconComponent(link.icon, isPresentation ? 20 : 24)}
+                  {getLinkIconComponent(link.icon, 24)}
                 </div>
               </a>
             );
@@ -674,7 +596,6 @@ export default function Presentation() {
   const renderProductBadge = (
     badge: NonNullable<typeof slides[0]['productBadge']>,
     isDark: boolean,
-    isPresentation = false,
   ) => {
     const isGemini = badge === 'gemini';
     const imageSrc = isGemini ? logoGemini : logoNotebook;
@@ -685,7 +606,6 @@ export default function Presentation() {
       <motion.a
         initial={{ opacity: 0, x: 20, scale: 0.94 }}
         whileInView={{ opacity: 1, x: 0, scale: 1 }}
-        animate={isPresentation ? { opacity: 1, x: 0, scale: 1 } : undefined}
         viewport={{ once: true }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
         href={href}
@@ -699,7 +619,7 @@ export default function Presentation() {
         <img
           src={imageSrc}
           alt={`Logo ${label}`}
-          className={`${isPresentation ? 'h-14 md:h-16' : 'h-12 md:h-14'} w-auto object-contain drop-shadow-sm`}
+          className="h-12 md:h-14 w-auto object-contain drop-shadow-sm"
         />
       </motion.a>
     );
@@ -724,7 +644,7 @@ export default function Presentation() {
           </div>
         </div>
         
-        {/* Progress Dots & Present Button */}
+        {/* Progress Dots */}
         <div className="flex items-center gap-4">
           <div className="hidden lg:flex gap-2 mr-4">
             {slides.map((slide) => (
@@ -738,13 +658,6 @@ export default function Presentation() {
               />
             ))}
           </div>
-          <button
-            onClick={startSlideshow}
-            className="flex items-center gap-2 bg-epagri-green text-white px-4 py-2 rounded-full font-bold hover:bg-epagri-dark transition-colors text-sm shadow-md"
-          >
-            <Play size={16} className="fill-current" />
-            <span className="hidden sm:inline">Apresentar</span>
-          </button>
         </div>
       </header>
 
@@ -781,6 +694,13 @@ export default function Presentation() {
               >
                 {/* Section Header */}
                 <div className="mb-6 md:mb-8 border-b border-slate-200/20 pb-4 md:pb-6">
+                  <div className={`inline-flex items-center gap-3 px-5 py-2 text-sm font-bold uppercase tracking-widest rounded-full mb-4 md:mb-6 shadow-sm ${
+                    isDark ? 'bg-epagri-olive text-epagri-dark' : 
+                    'bg-epagri-dark text-white'
+                  }`}>
+                    <span className="w-2 h-2 rounded-full bg-current opacity-50"></span>
+                    {slide.subtitle}
+                  </div>
                   <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                     <h2 className={`text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight ${
                       isDark ? 'text-white' : 'text-epagri-dark'
@@ -812,11 +732,11 @@ export default function Presentation() {
                 {/* Section Body */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                   <div className={(slide.links || slide.qrCode) && slide.id !== 'materiais' ? 'lg:col-span-7 xl:col-span-8' : 'lg:col-span-12'}>
-                    <div className={`prose prose-base md:prose-lg max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
-                      isDark ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200' : 
+                    <div className={`prose prose-base md:prose-lg max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify prose-table:w-full prose-th:text-left prose-th:font-bold prose-th:border prose-th:border-slate-300 prose-th:px-3 prose-th:py-2 prose-td:border prose-td:border-slate-200 prose-td:px-3 prose-td:py-2 prose-tr:even:bg-slate-50 ${
+                      isDark ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200 prose-th:border-slate-600 prose-td:border-slate-700 prose-tr:even:bg-white/5' : 
                       'prose-slate prose-headings:text-epagri-dark prose-a:text-epagri-green hover:prose-a:text-epagri-dark prose-strong:text-slate-900'
                     }`}>
-                      <ReactMarkdown>{slide.content}</ReactMarkdown>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{slide.content}</ReactMarkdown>
                     </div>
 
                     {slide.formulaCards && renderFormulaCards(slide.formulaCards, isDark, false, slide.formulaStartNumber || 1)}
@@ -936,7 +856,7 @@ export default function Presentation() {
                       </div>
                     )}
 
-                    {slide.id === 'materiais' && slide.links && renderLinksWithQRCodes(slide.links, isDark)}
+                    {slide.id === 'materiais' && slide.links && renderLinksWithQRCodes(slide.links, isDark, false)}
                   </div>
 
                   {/* Sidebar (Links or QRCode only) - não exibe no slide de materiais */}
@@ -961,254 +881,6 @@ export default function Presentation() {
           );
         })}
       </main>
-
-      {/* Slideshow Overlay */}
-      <AnimatePresence>
-        {isSlideshow && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={`fixed inset-0 z-[60] flex flex-col justify-start overflow-y-auto overflow-x-hidden ${
-              slides[slideIndex].theme === 'dark' ? 'bg-epagri-dark text-white' : 
-              slides[slideIndex].theme === 'accent' ? 'bg-slate-100 text-slate-900' : 
-              'bg-white text-slate-900'
-            }`}
-          >
-            <BackgroundAnimation
-              key={`bg-${slideIndex}`}
-              type={slides[slideIndex].backgroundAnimation}
-              productBadge={slides[slideIndex].productBadge}
-            />
-            {/* Decorative elements */}
-            {slides[slideIndex].theme === 'dark' && (
-              <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-epagri-green rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-            )}
-
-            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-10 lg:px-14 pt-4 md:pt-8 pb-24 md:pb-28 relative z-10 flex-1 flex flex-col justify-start lg:justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={slideIndex}
-                  initial={{ 
-                    opacity: 0, 
-                    x: direction > 0 ? 50 : direction < 0 ? -50 : 0 
-                  }}
-                  animate={{ 
-                    opacity: 1,
-                    x: 0 
-                  }}
-                  exit={{ 
-                    opacity: 0, 
-                    x: direction > 0 ? -50 : direction < 0 ? 50 : 0 
-                  }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="w-full pb-6"
-                >
-                  {/* Section Header */}
-                <div className="mb-4 md:mb-6 border-b border-slate-200/20 pb-3 md:pb-5">
-                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                    <h2 className={`text-[clamp(1.9rem,4.2vw,3.8rem)] font-display font-black tracking-tight leading-tight ${
-                      slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'
-                    }`}>
-                      {slides[slideIndex].id === 'welcome' ? (
-                        <motion.span
-                          initial={{ backgroundPosition: '0% 50%' }}
-                          animate={{ backgroundPosition: '100% 50%' }}
-                          transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-                          className="bg-gradient-to-r from-white via-epagri-olive to-white bg-[length:200%_auto] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(166,206,57,0.3)]"
-                        >
-                          {slides[slideIndex].title}
-                        </motion.span>
-                      ) : (
-                        slides[slideIndex].title
-                      )}
-                    </h2>
-
-                    {slides[slideIndex].productBadge && (
-                      <div className="flex justify-end md:shrink-0 md:pt-2 md:pl-6 md:ml-6">
-                        {renderProductBadge(slides[slideIndex].productBadge, slides[slideIndex].theme === 'dark', true)}
-                      </div>
-                    )}
-                  </div>
-
-                  {slides[slideIndex].spotlightQuote && renderSpotlightQuote(slides[slideIndex].spotlightQuote, slides[slideIndex].theme === 'dark')}
-                </div>
-
-                {/* Section Body */}
-                <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-12 items-start">
-                  <div className={(slides[slideIndex].links || slides[slideIndex].qrCode) && slides[slideIndex].id !== 'materiais' ? 'xl:col-span-7 2xl:col-span-8' : 'xl:col-span-12'}>
-                    <div className={`prose prose-sm sm:prose-base xl:prose-lg max-w-none leading-relaxed text-justify prose-p:text-justify prose-li:text-justify ${
-                      slides[slideIndex].theme === 'dark' ? 'prose-invert prose-p:text-slate-200 prose-strong:text-white prose-li:text-slate-200' : 
-                      'prose-slate prose-headings:text-epagri-dark prose-a:text-epagri-green hover:prose-a:text-epagri-dark prose-strong:text-slate-900'
-                    }`}>
-                      <ReactMarkdown>{slides[slideIndex].content}</ReactMarkdown>
-                    </div>
-
-                    {slides[slideIndex].formulaCards && renderFormulaCards(slides[slideIndex].formulaCards, slides[slideIndex].theme === 'dark', true, slides[slideIndex].formulaStartNumber || 1)}
-
-
-                    {slides[slideIndex].timeline && (
-                      <div className="mt-8 md:mt-16 mb-4 md:mb-8 relative w-full flex items-center justify-between px-1 md:px-2">
-                        {/* Main horizontal line */}
-                        <div className={`absolute left-2 right-2 h-0.5 md:h-1 top-1/2 -translate-y-1/2 z-0 rounded-full ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive/30' : 'bg-epagri-green/30'}`}></div>
-                        
-                        {slides[slideIndex].timeline.map((item, idx) => {
-                          const isTopText = idx % 2 === 0;
-                          const Icon = timelineIcons[idx % timelineIcons.length];
-                          const isFirst = idx === 0;
-                          const isLast = idx === slides[slideIndex].timeline!.length - 1;
-                          const cardPositionClass = isFirst ? 'left-0' : isLast ? 'right-0' : 'left-1/2 -translate-x-1/2';
-                          const timelineKey = `${slides[slideIndex].id}-${idx}`;
-                          const isTimelineActive = activeTimelineItem === timelineKey;
-                          
-                          return (
-                            <motion.div 
-                              key={idx}
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: idx * 0.1 }}
-                              className="relative z-10 hover:z-50 flex flex-col items-center flex-1 min-w-0 group cursor-pointer"
-                              role="button"
-                              tabIndex={0}
-                              aria-expanded={isTimelineActive}
-                              onClick={() => toggleTimelineItem(timelineKey)}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault();
-                                  toggleTimelineItem(timelineKey);
-                                }
-                              }}
-                            >
-                              {/* Top Section */}
-                              <div className="relative flex flex-col items-center justify-end h-24 md:h-36 mb-1 w-full px-0.5 md:px-1">
-                                {isTopText ? (
-                                  <>
-                                    <div className={`flex flex-col items-center justify-end w-full transition-opacity duration-300 ${isTimelineActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
-                                      <div className={`text-center mb-1 md:mb-2 w-full`}>
-                                        <div className={`text-[8px] md:text-[11px] leading-tight line-clamp-3 md:line-clamp-4 ${slides[slideIndex].theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>
-                                          <span className={`font-bold block mb-0.5 truncate ${slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
-                                          <span className="hidden md:inline">{item.description}</span>
-                                        </div>
-                                      </div>
-                                      <div className={`font-display font-black text-xs md:text-xl ${slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
-                                      <div className={`w-px md:w-0.5 h-3 md:h-6 mt-1 ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive' : 'bg-epagri-green'}`}></div>
-                                    </div>
-                                    
-                                    {/* Hover Card for Top */}
-                                    <div className={`absolute bottom-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 transition-all duration-300 ${isTimelineActive ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:scale-100'} ${slides[slideIndex].theme === 'dark' ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
-                                      <div className={`font-display font-black text-sm md:text-base mb-1 ${slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
-                                      <span className={`font-bold block mb-1 text-xs md:text-sm ${slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
-                                      <span className={`text-[10px] md:text-xs leading-relaxed block ${slides[slideIndex].theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</span>
-                                    </div>
-                                  </>
-                                ) : (
-                                  <>
-                                    <div className={`w-5 h-5 md:w-10 md:h-10 rounded-full flex items-center justify-center mb-1 md:mb-2 shadow-md ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive text-epagri-dark' : 'bg-epagri-dark text-white'}`}>
-                                      <Icon className="w-3 h-3 md:w-5 md:h-5" />
-                                    </div>
-                                    <div className={`w-px md:w-0.5 h-3 md:h-6 mt-1 ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive' : 'bg-epagri-green'}`}></div>
-                                  </>
-                                )}
-                              </div>
-
-                              {/* Center Dot */}
-                              <div className={`w-2 h-2 md:w-4 md:h-4 rounded-full border-[1.5px] md:border-[3px] z-10 ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-dark border-epagri-olive' : 'bg-white border-epagri-green'}`}></div>
-
-                              {/* Bottom Section */}
-                              <div className="relative flex flex-col items-center justify-start h-24 md:h-36 mt-1 w-full px-0.5 md:px-1">
-                                {!isTopText ? (
-                                  <>
-                                    <div className={`flex flex-col items-center justify-start w-full transition-opacity duration-300 ${isTimelineActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
-                                      <div className={`w-px md:w-0.5 h-3 md:h-6 mb-1 ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive' : 'bg-epagri-green'}`}></div>
-                                      <div className={`font-display font-black text-xs md:text-xl ${slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
-                                      <div className={`text-center mt-1 md:mt-2 w-full`}>
-                                        <div className={`text-[8px] md:text-[11px] leading-tight line-clamp-3 md:line-clamp-4 ${slides[slideIndex].theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>
-                                          <span className={`font-bold block mb-0.5 truncate ${slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
-                                          <span className="hidden md:inline">{item.description}</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    
-                                    {/* Hover Card for Bottom */}
-                                    <div className={`absolute top-2 ${cardPositionClass} w-48 md:w-64 p-3 md:p-4 rounded-xl shadow-2xl z-50 transition-all duration-300 ${isTimelineActive ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:scale-100'} ${slides[slideIndex].theme === 'dark' ? 'bg-slate-800 border border-slate-700' : 'bg-white border border-slate-200'}`}>
-                                      <div className={`font-display font-black text-sm md:text-base mb-1 ${slides[slideIndex].theme === 'dark' ? 'text-epagri-olive' : 'text-epagri-green'}`}>{item.year}</div>
-                                      <span className={`font-bold block mb-1 text-xs md:text-sm ${slides[slideIndex].theme === 'dark' ? 'text-white' : 'text-epagri-dark'}`}>{item.title}</span>
-                                      <span className={`text-[10px] md:text-xs leading-relaxed block ${slides[slideIndex].theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>{item.description}</span>
-                                    </div>
-                                  </>
-                                ) : (
-                                  <>
-                                    <div className={`w-px md:w-0.5 h-3 md:h-6 mb-1 ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive' : 'bg-epagri-green'}`}></div>
-                                    <div className={`w-5 h-5 md:w-10 md:h-10 rounded-full flex items-center justify-center mt-1 md:mt-2 shadow-md ${slides[slideIndex].theme === 'dark' ? 'bg-epagri-olive text-epagri-dark' : 'bg-epagri-dark text-white'}`}>
-                                      <Icon className="w-3 h-3 md:w-5 md:h-5" />
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    )}
-
-                    {slides[slideIndex].examples && slides[slideIndex].id !== 'minilab-1' && (
-                      <div className={`mt-12 grid grid-cols-1 gap-8 mx-auto ${
-                        slides[slideIndex].examples.length === 1 ? 'max-w-2xl' : 'md:grid-cols-2 max-w-6xl'
-                      }`}>
-                        {slides[slideIndex].examples.map((ex, idx) => (
-                          <div key={idx}>{renderExampleCard(ex, slides[slideIndex].theme === 'dark', slides[slideIndex].id, true)}</div>
-                        ))}
-                      </div>
-                    )}
-
-                    {slides[slideIndex].id === 'materiais' && slides[slideIndex].links && renderLinksWithQRCodes(slides[slideIndex].links, slides[slideIndex].theme === 'dark')}
-                  </div>
-
-                  {/* Sidebar - não exibe no slide de materiais */}
-                  {(slides[slideIndex].links || slides[slideIndex].qrCode) && slides[slideIndex].id !== 'materiais' && (
-                    <div className="xl:col-span-5 2xl:col-span-4">
-                      {renderSidebar(slides[slideIndex], slides[slideIndex].theme === 'dark', true)}
-                    </div>
-                  )}
-                </div>
-
-                {slides[slideIndex].examples && slides[slideIndex].id === 'minilab-1' && (
-                  <div className={`mt-12 grid grid-cols-1 gap-8 mx-auto ${
-                    slides[slideIndex].examples.length === 1 ? 'max-w-2xl' : 'md:grid-cols-2 max-w-6xl'
-                  }`}>
-                    {slides[slideIndex].examples.map((ex, idx) => (
-                      <div key={idx}>{renderExampleCard(ex, slides[slideIndex].theme === 'dark', slides[slideIndex].id, true)}</div>
-                    ))}
-                  </div>
-                )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <div className="fixed top-4 right-4 z-[70] hidden xl:flex items-center gap-3 rounded-2xl border border-white/15 bg-black/45 px-3 py-2 text-white backdrop-blur-md shadow-lg">
-              <div className="flex items-center gap-2 text-sm font-medium">
-                <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">&larr;</span>
-                <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">&rarr;</span>
-                <span className="hidden sm:inline text-white/85">navegar</span>
-              </div>
-              <div className="h-6 w-px bg-white/20"></div>
-              <div className="flex items-center gap-2 text-sm font-medium">
-                <span className="rounded-md border border-white/20 bg-white/10 px-2 py-1 text-xs font-bold">Esc</span>
-                <span className="hidden sm:inline text-white/85">sair</span>
-              </div>
-            </div>
-
-            {/* Controls */}
-            <div className="fixed bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-[70] bg-black/40 backdrop-blur-md text-white px-3 py-1.5 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300">
-              <span className="text-sm font-bold mr-2">{slideIndex + 1} / {slides.length}</span>
-              <button onClick={prevSlide} disabled={slideIndex === 0} className="p-2 rounded-full hover:bg-white/20 disabled:opacity-30 transition-colors"><ChevronLeft size={24} /></button>
-              <button onClick={nextSlide} disabled={slideIndex === slides.length - 1} className="p-2 rounded-full hover:bg-white/20 disabled:opacity-30 transition-colors"><ChevronRight size={24} /></button>
-              <div className="w-px h-6 bg-white/30 mx-2"></div>
-              <button onClick={exitSlideshow} className="p-2 rounded-full hover:bg-white/20 transition-colors" title="Sair da apresentação"><X size={24} /></button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
     </div>
   );
